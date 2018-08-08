@@ -1,3 +1,5 @@
+![Build Status](https://codeship.com/projects/7bbaf670-7d8d-0136-b445-1605c29d55b0/status?branch=master)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
