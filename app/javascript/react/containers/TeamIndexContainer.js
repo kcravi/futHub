@@ -24,11 +24,10 @@ class TeamIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ teams: body })
+        this.setState({ teams: body.teams })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
-
 
   render(){
     let teams = this.state.teams.map(team => {
@@ -46,9 +45,9 @@ class TeamIndexContainer extends Component {
       <div>
         <h2>Team List: </h2>
         {teams}
-        <button className="new-team">
-            Make a New Team
-        </button>
+        <Link to='/teams/new'>
+          <button className="new-team">Make a New Team </button>
+        </Link>
       </div>
     )
   }

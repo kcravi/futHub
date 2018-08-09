@@ -9,16 +9,18 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
     it 'should return a list of all the teams' do
       get :index
       returned_json = JSON.parse(response.body)
-
+        binding.pry
       expect(response.status).to eq 200
       expect(response.content_type).to eq "application/json"
 
-      expect(returned_json.length).to eq 2
-      expect(returned_json[0]["name"]).to eq team.name
-      expect(returned_json[0]["city"]).to eq team.city
+      expect(returned_json.length).to eq 1
+      expect(returned_json["teams"].length).to eq 2
 
-      expect(returned_json[1]["city"]).to eq "Cambridge"
-      expect(returned_json[1]["zipcode"]).to eq "02140"
+      expect(returned_json["teams"][0]["name"]).to eq team.name
+      expect(returned_json["teams"][0]["city"]).to eq team.city
+
+      expect(returned_json["teams"][1]["city"]).to eq "Cambridge"
+      expect(returned_json["teams"][1]["zipcode"]).to eq "02140"
     end
   end
 end
