@@ -9,7 +9,6 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
     it 'should return a list of all the teams' do
       get :index
       returned_json = JSON.parse(response.body)
-        binding.pry
       expect(response.status).to eq 200
       expect(response.content_type).to eq "application/json"
 
