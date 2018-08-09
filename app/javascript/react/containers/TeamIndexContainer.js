@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 
 import TeamIndexTile from '../components/TeamIndexTile'
 
@@ -46,7 +47,7 @@ class TeamIndexContainer extends Component {
         <h2>Team List: </h2>
         {teams}
         <button className="new-team">
-           Make a New Team
+            Make a New Team
         </button>
       </div>
     )

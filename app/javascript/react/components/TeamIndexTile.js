@@ -5,7 +5,7 @@ const TeamIndexTile = props => {
   return(
     <div className='team-list'>
       <h3>
-        {props.name}
+      <Link to={`/teams/${props.id}`}> {props.name} </Link>
       </h3>
       {props.city}, {props.state}
     </div>
