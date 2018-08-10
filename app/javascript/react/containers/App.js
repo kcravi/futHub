@@ -4,6 +4,7 @@ import { Route, IndexRoute, Router, browserHistory } from 'react-router';
 import TeamIndexContainer from './TeamIndexContainer'
 import TeamShowContainer from './TeamShowContainer'
 import TeamFormContainer from './TeamFormContainer'
+import TeamEditContainer from './TeamEditContainer'
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
         <Route path='/teams' component={TeamIndexContainer} />
         <Route path='/teams/new' component={TeamFormContainer} />
         <Route path='/teams/:id' component={TeamShowContainer} />
+        <Route path='/teams/:id/edit' component={TeamEditContainer} />
       </Route>
     </Router>
   )

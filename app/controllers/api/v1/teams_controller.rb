@@ -24,6 +24,17 @@ class Api::V1::TeamsController < ApiController
     end
   end
 
+  def edit; end
+
+  def update
+    edit_team = Team.find(params[:id])
+    if edit_team.update(team_params)
+      render json: {team: edit_team}
+    else
+      render json: {errors: edit_team.errors}
+    end
+  end
+
   private
 
   def team_params
