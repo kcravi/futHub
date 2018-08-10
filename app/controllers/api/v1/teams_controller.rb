@@ -1,8 +1,8 @@
 class Api::V1::TeamsController < ApiController
+   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    team = Team.all
-    render json: team
+    render json: Team.all.sort
   end
 
   def show
@@ -50,6 +50,13 @@ class Api::V1::TeamsController < ApiController
       :phone_number,
       :website
     )
+  end
+
+  def authorize_user
+    if !user_signed_in? || !current_user.admin?
+      flash[:notice] = "You do not have access to this page."
+      redirect_to root_path
+    end
   end
 
 end
