@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import TeamShowTile from '../components/TeamShowTile'
+import { Link } from 'react-router';
+import TeamShowTile from '../components/TeamShowTile';
 
 class TeamShowContainer extends Component {
   constructor(props){
@@ -47,12 +48,14 @@ class TeamShowContainer extends Component {
           phone_number={this.state.team.phone_number}
         />
         <br/>
-        <button>
-            Edit Team Info
-        </button>
+        <Link to={`/teams/${this.state.team.id}/edit`}>
+          <button>
+              Edit Team Info
+          </button>
+        </Link>
      </div>
     )
   }
 }
 
-export default TeamShowContainer
+export default TeamShowContainer;
