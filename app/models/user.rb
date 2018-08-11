@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
+  mount_uploader :profile_photo, ProfilePhotoUploader
+
 end

@@ -21,10 +21,13 @@
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>
+          <li><%= link_to 'Edit', edit_user_registration_path %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <% if current_user.admin? %>
+          <%- if current_user.profile_photo.thumb.url -%>
+            <li><%= image_tag current_user.profile_photo.thumb.url %></li>
+          <%- elsif current_user.admin? -%>
             <li><%= link_to "Admin Section", admin_path %></li>
-          <% end %>
+          <%- end -%>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <li><%= link_to 'Sign In', new_user_session_path %></li>
