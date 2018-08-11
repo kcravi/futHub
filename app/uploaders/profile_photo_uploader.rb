@@ -9,6 +9,7 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   else
     storage :fog
   end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -16,11 +17,10 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
+  # For Rails 3.1+ asset pipeline compatibility:
+
   # def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  #   ActionController::Base.helpers.asset_path("/images/" + [version_name, "photo.png"].compact.join('_'))
   # end
 
   # Process files as they are uploaded:
@@ -31,8 +31,12 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+
+  # def default_url
+  #   "photo.png"
+  # end
   version :thumb do
-    process resize_to_fit: [70, 70]
+    process resize_to_fit: [50, 50]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
