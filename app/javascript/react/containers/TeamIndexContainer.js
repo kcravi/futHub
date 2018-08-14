@@ -38,15 +38,18 @@ class TeamIndexContainer extends Component {
           name={team.name}
           city={team.city}
           state={team.state}
+          image={team.photo.url}
         />
       )
     })
     return(
       <div>
         <h2>Team List: </h2>
-        {teams}
-        <Link to='/teams/new'>
-          <button className="new-team">Make a New Team </button>
+          <div className="wrapper">
+            {teams}
+          </div>
+          <Link to='/teams/new'>
+            <button className="button">Make a New Team </button>
         </Link>
       </div>
     )

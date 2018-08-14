@@ -6,6 +6,6 @@ class TeamSerializer < ActiveModel::Serializer
    :zipcode,
    :description,
    :website,
-   :phone_number
-   
+   :phone_number,
+   :photo
 end

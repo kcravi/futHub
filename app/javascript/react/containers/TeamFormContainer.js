@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router'
+import Dropzone from 'react-dropzone';
 
 import TeamFormTile from '../components/TeamFormTile'
 
@@ -14,13 +15,15 @@ class TeamFormContainer extends React.Component {
       description: '',
       phone_number: '',
       website: '',
-      errors: {}
+      errors: {},
+      file: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addNewTeam = this.addNewTeam.bind(this);
     this.validateEntry = this.validateEntry.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
     handleChange(event){
@@ -41,7 +44,8 @@ class TeamFormContainer extends React.Component {
         description: "",
         phone_number: "",
         website: "",
-        errors: {}
+        errors: {},
+        file: []
       });
     }
 
@@ -55,15 +59,15 @@ class TeamFormContainer extends React.Component {
       })
 
       if (Object.keys(this.state.errors).length == 0){
-        let payload = {
-          name: this.state.name,
-          city: this.state.city,
-          state: this.state.state,
-          zipcode: this.state.zipcode,
-          description: this.state.description,
-          phone_number: this.state.phone_number,
-          website: this.state.website
-        }
+        let payload = new FormData();
+        payload.append("name", this.state.name);
+        payload.append("city", this.state.city);
+        payload.append("state", this.state.state);
+        payload.append("zipcode", this.state.zipcode);
+        payload.append("description", this.state.description);
+        payload.append("phone_number", this.state.phone_number);
+        payload.append("website", this.state.websit);
+        payload.append("photo", this.state.file[0]);
         this.addNewTeam(payload)
         this.handleClear();
       }
@@ -82,12 +86,14 @@ class TeamFormContainer extends React.Component {
       }
     }
 
+    // The payload needs not to be stringified and headers is not required when FORMDATA object is used during post/patch method. 
+    // body: JSON.stringify(payload),
+    // headers: { 'Content-Type': 'application/json' }
     addNewTeam(payload){
       fetch('/api/v1/teams.json', {
        credentials: 'same-origin',
        method: 'POST',
-       body: JSON.stringify(payload),
-       headers: { 'Content-Type': 'application/json' }
+       body: payload
      })
      .then(response => {
          if(response.ok){
@@ -105,6 +111,15 @@ class TeamFormContainer extends React.Component {
        .then(body => browserHistory.push(`/teams/${body.team.id}`))
        .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
+
+    onDrop(file) {
+     if(file.length == 1) {
+       this.setState({ file: file })
+     } else {
+       let newError = { picture: `You can only upload one photo per team.`};
+       this.setState({ errors: Object.assign(this.state.errors, newError) });
+     }
+   }
 
   render (){
     let errorDiv;
@@ -163,7 +178,20 @@ class TeamFormContainer extends React.Component {
           content={this.state.phone_number}
           handlerFunction={this.handleChange}
         />
-        <button type="submit">Submit</button>
+       <section>
+        <div className="dropzone">
+          <Dropzone onDrop={this.onDrop}>
+            <p>Try dropping some files here, or click to select files to upload.</p>
+          </Dropzone>
+        </div>
+        <aside>
+          <h2>Dropped files</h2>
+          <ul>
+            {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
+          </ul>
+        </aside>
+       </section>
+       <button type="submit">Submit</button>
       </form>
     )
   }

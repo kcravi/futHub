@@ -35,7 +35,6 @@ class TeamShowContainer extends Component {
   render(){
     return(
       <div>
-        <h2> Team Info </h2>
         <TeamShowTile
           key={this.state.team.id}
           id={this.state.team.id}
@@ -46,10 +45,11 @@ class TeamShowContainer extends Component {
           description={this.state.team.description}
           website={this.state.team.website}
           phone_number={this.state.team.phone_number}
+          image={this.state.team.photo}
         />
         <br/>
         <Link to={`/teams/${this.state.team.id}/edit`}>
-          <button>
+          <button className="button">
               Edit Team Info
           </button>
         </Link>

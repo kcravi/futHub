@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import Dropzone from 'react-dropzone';
 
 import TeamFormTile from '../components/TeamFormTile';
 
@@ -14,13 +15,15 @@ class TeamEditContainer extends React.Component {
       description: '',
       phone_number: '',
       website: '',
-      errors: {}
+      errors: {},
+      file: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.editTeam = this.editTeam.bind(this);
     this.validateEntry = this.validateEntry.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
     handleChange(event){
@@ -41,30 +44,29 @@ class TeamEditContainer extends React.Component {
         description: "",
         phone_number: "",
         website: "",
-        errors: ""
+        errors: {},
+        file: []
       });
     }
 
     handleSubmit(event){
       event.preventDefault();
-
       Object.keys(this.state).forEach(key => {
-        if (key != "errors" && key != "phone_number" && key != "website") {
+        if (key != "errors" && key != "phone_number" && key != "website" && key != "file") {
           this.validateEntry(key, this.state[key])
         }
       })
-
       if (Object.keys(this.state.errors).length == 0){
-        let payload = {
-          name: this.state.name,
-          city: this.state.city,
-          state: this.state.state,
-          zipcode: this.state.zipcode,
-          description: this.state.description,
-          phone_number: this.state.phone_number,
-          website: this.state.website
-        }
-        this.editTeam(payload)
+        let payload = new FormData();
+        payload.append("name", this.state.name);
+        payload.append("city", this.state.city);
+        payload.append("state", this.state.state);
+        payload.append("zipcode", this.state.zipcode);
+        payload.append("description", this.state.description);
+        payload.append("phone_number", this.state.phone_number);
+        payload.append("website", this.state.website);
+        payload.append("photo", this.state.file[0]);
+        this.editTeam(payload);
         this.handleClear();
       }
     }
@@ -109,12 +111,13 @@ class TeamEditContainer extends React.Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
+    // body: JSON.stringify(payload),
+    // headers: { 'Content-Type': 'application/json' }
     editTeam(payload){
       fetch(`/api/v1/teams/${this.props.params.id}.json`, {
        credentials: 'same-origin',
        method: 'PATCH',
-       body: JSON.stringify(payload),
-       headers: { 'Content-Type': 'application/json' }
+       body: payload
      })
      .then(response => {
          if(response.ok){
@@ -132,6 +135,15 @@ class TeamEditContainer extends React.Component {
        .then(body => browserHistory.push(`/teams/${body.team.id}`))
        .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
+
+    onDrop(file) {
+     if(file.length == 1) {
+       this.setState({ file: file })
+     } else {
+       let newError = { picture: `You can only upload one photo per team.`};
+       this.setState({ errors: Object.assign(this.state.errors, newError) });
+     }
+   }
 
   render (){
     let errorDiv;
@@ -189,7 +201,20 @@ class TeamEditContainer extends React.Component {
             content={this.state.phone_number}
             handlerFunction={this.handleChange}
           />
-          <button type="submit" value="submit">Save and Submit</button>
+        <section>
+          <div className="dropzone">
+            <Dropzone onDrop={this.onDrop}>
+              <p>Try dropping some files here, or click to select files to upload.</p>
+            </Dropzone>
+          </div>
+          <aside>
+            <h2>Dropped files</h2>
+            <ul>
+              {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
+            </ul>
+          </aside>
+        </section>
+        <button type="submit" value="submit">Save and Submit</button>
       </form>
     )
   }
