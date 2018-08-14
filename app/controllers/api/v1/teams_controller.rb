@@ -39,7 +39,6 @@ class Api::V1::TeamsController < ApiController
 
   def team_params
     params
-    .require(:team)
     .permit(
       :id,
       :name,
@@ -48,7 +47,8 @@ class Api::V1::TeamsController < ApiController
       :zipcode,
       :description,
       :phone_number,
-      :website
+      :website,
+      :photo
     )
   end
 

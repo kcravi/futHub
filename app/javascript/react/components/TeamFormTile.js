@@ -1,7 +1,6 @@
 import React from 'react'
 
 const TeamFormTile = props => {
-
   return (
     <div>
       <label htmlFor={props.name}>{props.label}</label>
