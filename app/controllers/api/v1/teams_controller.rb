@@ -35,6 +35,19 @@ class Api::V1::TeamsController < ApiController
     end
   end
 
+  # def search
+  #   teams = Team.where("name ILIKE ? OR description ILIKE ?", "%#{params['search_string']}%", "%#{params['search_string']}%")
+  #   render json: teams
+  # end
+
+  def search
+    binding.pry
+    topic = params[:topic_query]
+    meetup_parser = MeetupParser.new
+    meetup_parser.search(topic)
+    render json: {team: meetup_parser.team}
+  end
+
   private
 
   def team_params

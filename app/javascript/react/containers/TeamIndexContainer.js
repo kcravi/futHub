@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 
 import TeamIndexTile from '../components/TeamIndexTile'
+import SearchBarContainer from './SearchBarContainer'
 
 class TeamIndexContainer extends Component {
   constructor(props){
@@ -24,7 +25,7 @@ class TeamIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ teams: body.teams })
+        this.setState({ teams: body.team })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
@@ -44,7 +45,10 @@ class TeamIndexContainer extends Component {
     })
     return(
       <div>
-        <h2>Team List: </h2>
+          <h2>Team List:</h2>
+
+            <SearchBarContainer />
+
           <div className="wrapper">
             {teams}
           </div>

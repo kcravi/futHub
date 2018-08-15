@@ -11,4 +11,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      get "/teams", to: "teams#search"
+      # post 'teams/search', to: 'teams#search'
+    end
+  end
 end

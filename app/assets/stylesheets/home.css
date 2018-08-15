@@ -15,7 +15,7 @@ h2 {
 
 .snip1527 {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  color: #ffffff;
+  /* color: #ffffff; */
   float: left;
   font-family: 'Lato', Arial, sans-serif;
   font-size: 16px;
@@ -60,11 +60,11 @@ h2 {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #700877;
+  background: #DCDCDC;
   content: '';
-  background: -moz-linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
-  background: -webkit-linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
-  background: linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
+  background: -moz-linear-gradient(90deg, #DCDCDC 0%, #ADD8E6 100%, #ADD8E6 100%);
+  background: -webkit-linear-gradient(90deg, #DCDCDC 0%, #ADD8E6 100%, #ADD8E6 100%);
+  background: linear-gradient(90deg, #DCDCDC 0%, #ADD8E6 100%, #ADD8E6 100%);
   opacity: 1;
   z-index: -1;
 }

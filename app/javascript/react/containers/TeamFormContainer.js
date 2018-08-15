@@ -86,7 +86,7 @@ class TeamFormContainer extends React.Component {
       }
     }
 
-    // The payload needs not to be stringified and headers is not required when FORMDATA object is used during post/patch method. 
+    // The payload needs not to be stringified and headers is not required when FORMDATA object is used during post/patch method.
     // body: JSON.stringify(payload),
     // headers: { 'Content-Type': 'application/json' }
     addNewTeam(payload){
@@ -132,8 +132,8 @@ class TeamFormContainer extends React.Component {
     }
 
     return (
-      <form id='team-form' onSubmit={this.handleSubmit}>
-        <h1> Add New Team </h1>
+      <form className="row" id='team-form' onSubmit={this.handleSubmit}>
+        <h1 className="form-header"> Add New Team </h1>
         {errorDiv}
 
        <TeamFormTile
@@ -191,7 +191,7 @@ class TeamFormContainer extends React.Component {
           </ul>
         </aside>
        </section>
-       <button type="submit">Submit</button>
+       <button className="button" type="submit">Submit</button>
       </form>
     )
   }
