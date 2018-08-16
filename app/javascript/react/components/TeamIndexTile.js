@@ -6,7 +6,7 @@ const TeamIndexTile = props => {
   if(props.image){
     image = <img src={props.image} />
   } else {
-    image = <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" />
+    image = <img src="https://www.themuseatdreyfoos.com/wp-content/uploads/2016/07/CASLs15CoachesMeeting.jpg" />
   }
 
   return(

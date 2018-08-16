@@ -2,27 +2,24 @@ require 'httparty'
 require 'pry'
 
 class MeetupParser
-  attr_reader :team
+  attr_reader :meetups
 
   def initialize
-    @team = []
+    @meetups = []
   end
 
   def search(query)
     # response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=soccer")
-    # binding.pry
-    response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=#{query}")
-    count = 0;
+    response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=soccer&zip=#{query}")
     response["results"].each do |meetup|
-      # binding.pry
-      @team << Team.create(
-        id: count+=1,
+      new_team = Team.new(
         name: meetup["name"],
         city: meetup["city"],
         state: meetup["state"],
         description: meetup["description"]
-        # photo: meetup["group_photo"]["photo_id"]
+      #   photo: meetup["group_photo"]["highres_link"]
       )
+      @meetups << new_team
     end
   end
 end

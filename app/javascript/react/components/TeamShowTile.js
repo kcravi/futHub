@@ -29,9 +29,9 @@ const TeamShowTile = props => {
             </ul>
           </TabList>
 
-          <div className="tab">
-            <TabPanel>
-              <p>{props.description}</p>
+          <div className="row wrapper">
+            <TabPanel className="tabpanel">
+              <p >{props.description}</p>
             </TabPanel>
             <TabPanel>
               <li>Ravi KC</li>

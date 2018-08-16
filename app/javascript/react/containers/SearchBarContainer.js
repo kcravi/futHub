@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
+import TeamIndexTile from '../components/TeamIndexTile';
 
-class SearchBar extends Component {
+class SearchBarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +23,8 @@ class SearchBar extends Component {
     const body = JSON.stringify({
       search_string: this.state.searchString
     })
-    fetch('/api/v1/teams/search.json', {
+
+    fetch('/api/v1/meetups/search.json', {
       method: 'POST',
       body: body,
       credentials: 'same-origin',
@@ -30,7 +33,7 @@ class SearchBar extends Component {
     .then(response => response.json())
     .then(body => {
       debugger
-      this.setState({ teams: body })
+      this.setState({ teams: body.team })
     })
     console.log(`Form submitted: ${this.state.searchString}`);
   }
@@ -38,21 +41,35 @@ class SearchBar extends Component {
   render() {
     const teams = this.state.teams.map(team => {
       return(
-        <li>{team.name}</li>
+        <TeamIndexTile
+          name={team.name}
+          city={team.city}
+          state={team.state}
+          description={team.description}
+        />
       )
   })
     return(
       <div>
-        <form className="search-bar" onSubmit={this.handleSubmit}>
-          <label>Search-Bar</label>
-          <input type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
-
-          <input type='submit' value='Submit' />
-        </form>
-      <ul>{teams}</ul>
-    </div>
+        <div>
+          <form className="search-bar" onSubmit={this.handleSubmit}>
+            <label>Search-By-City</label>
+              <input type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
+              <input type='submit' value='Submit' />
+          </form>
+        </div>
+          <div className="container">
+            <h2>Team List</h2>
+            </div>
+              <div className="wrapper">
+                {teams}
+              </div>
+            <Link to='/teams/new'>
+              <button className="button"> Make a New Team </button>
+            </Link>
+     </div>
     )
   }
 }
 
-export default SearchBar;
+export default SearchBarContainer;

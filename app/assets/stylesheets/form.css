@@ -19,7 +19,7 @@
 
 .search-bar {
   padding: 10px 30px 10px 10px;
-  position: relative;
+  text-align: center;
   width: 200px;
   float: right;
 }
