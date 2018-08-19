@@ -16,7 +16,9 @@ h2 {
     width: 50%;
     float: left;
 } */
-
+.indexheader{
+  line-height: 2rem;
+}
 .wrapper {
   display: flex;
   flex-wrap: nowrap;
@@ -63,6 +65,8 @@ h2 {
   position: relative;
   bottom: 0;
   z-index: 1;
+  max-height: 5%;
+  height: 120px;
 }
 
 .snip1527 figcaption:before {
@@ -90,6 +94,7 @@ h2 {
 .snip1527 h4 {
   display: block;
   font-weight: 700;
+  font-size: 20px;
   letter-spacing: -0.4px;
   margin-bottom: 5px;
   text-align: center;
@@ -108,10 +113,10 @@ h2 {
 }
 
 .button {
-  font-family: 'Merienda', cursive;
+  font-family: 'Merienda';
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 5px 5px 20px rgba(134, 198, 237, 0.35);
   float: right;
 }

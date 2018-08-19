@@ -21,8 +21,8 @@ RSpec.describe Team, type: :model do
    it "is invalid with a state not specified" do
      expect(team3).to_not be_valid
    end
-   it "is invalid with a zipcode not specified" do
-     expect(team4).to_not be_valid
+   it "is valid with a zipcode not specified" do
+     expect(team4).to be_valid
    end
    it "is invalid with a description not specified" do
      expect(team5).to_not be_valid

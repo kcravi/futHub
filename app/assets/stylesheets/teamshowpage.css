@@ -17,5 +17,7 @@
 }
 
 .tabpanel {
-  margin-left: 23rem;
+  border: 1px black solid;
+  padding: 1em;
+  text-align: center;
 }

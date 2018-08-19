@@ -14,7 +14,7 @@ class Api::V1::TeamsController < ApiController
   def show
     render json: {
       team: Team.find(params[:id]),
-    #   meetup_team: MeetupParser.find(params[])
+      # meetup_team: MeetupParser.find(params[:id])
     }
   end
 
@@ -46,13 +46,6 @@ class Api::V1::TeamsController < ApiController
   #   # teams = Team.where("city ILIKE ? OR description ILIKE ?", "%#{params['search_string']}%", "%#{params['search_string']}%")
   #   teams = Team.where("city ILIKE ?" ,  "%#{params['search_string']}%")
   #   render json: teams
-  # end
-
-  # def search
-  #   topic = params[:search_string]
-  #   meetup_parser = MeetupParser.new
-  #   meetup_parser.search(topic)
-  #   render json: {team: meetup_parser.teams}
   # end
 
   private

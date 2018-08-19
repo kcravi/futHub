@@ -6,4 +6,5 @@ class Meetup < ApplicationRecord
   validates :lon, presence: true
   validates :lat, presence: true
 
-end 
+  mount_uploader :photo, MeetupUploader
+end

@@ -7,4 +7,5 @@ class Api::V1::MeetupsController < ApiController
     meetup_parser.search(topic)
     render json: {team: meetup_parser.meetups}
   end
+
 end
