@@ -15,3 +15,9 @@
 .tab {
   margin: 20px;
 }
+
+.tabpanel {
+  border: 1px black solid;
+  padding: 1em;
+  text-align: center;
+}

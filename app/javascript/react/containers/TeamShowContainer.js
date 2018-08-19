@@ -45,14 +45,21 @@ class TeamShowContainer extends Component {
           description={this.state.team.description}
           website={this.state.team.website}
           phone_number={this.state.team.phone_number}
-          image={this.state.team.photo}
+          url={this.state.team.url}
+          photo={this.state.team.photo}
         />
-        <br/>
+        <br/><br/>
+        <button className="button">
+            Join
+        </button>
         <Link to={`/teams/${this.state.team.id}/edit`}>
           <button className="button">
-              Edit Team Info
+            Edit
           </button>
         </Link>
+        <button className="button">
+            Delete
+        </button>
      </div>
     )
   }

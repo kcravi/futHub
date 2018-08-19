@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 
 import TeamIndexTile from '../components/TeamIndexTile'
+import TournamentIndexContainer from './TournamentIndexContainer'
 
 class TeamIndexContainer extends Component {
   constructor(props){
@@ -31,26 +32,32 @@ class TeamIndexContainer extends Component {
 
   render(){
     let teams = this.state.teams.map(team => {
-      return (
+      return(
         <TeamIndexTile
           key={team.id}
           id={team.id}
           name={team.name}
           city={team.city}
           state={team.state}
-          image={team.photo.url}
+          url={team.url}
+          photo={team.photo}
         />
       )
     })
+
     return(
       <div>
-        <h2>Team List: </h2>
-          <div className="wrapper">
-            {teams}
-          </div>
-          <Link to='/teams/new'>
-            <button className="button">Make a New Team </button>
+        <div className="container">
+          <h2>Team List</h2>
+        </div>
+        <div className="wrapper">
+          {teams}
+        </div>
+        <Link to='/teams/new'>
+          <button className="button"> Make a New Team </button>
         </Link>
+        <br/><br/><br/>
+        <TournamentIndexContainer />
       </div>
     )
   }

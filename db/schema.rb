@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_221504) do
+ActiveRecord::Schema.define(version: 2018_08_19_172643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meetups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.text "description", null: false
+    t.string "lon"
+    t.string "lat"
+    t.string "website"
+    t.string "photo"
+    t.integer "members"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "registrations", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -26,13 +40,33 @@ ActiveRecord::Schema.define(version: 2018_08_11_221504) do
     t.string "name", null: false
     t.string "city", null: false
     t.string "state", null: false
-    t.string "zipcode", null: false
     t.string "description", null: false
     t.string "phone_number"
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
+    t.string "zipcode"
+    t.string "url"
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "organizer", null: false
+    t.text "description", null: false
+    t.string "street", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "zipcode", null: false
+    t.string "fee", null: false
+    t.string "awards", null: false
+    t.string "status", null: false
+    t.string "types", null: false
+    t.string "website"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
   end
 
   create_table "users", force: :cascade do |t|

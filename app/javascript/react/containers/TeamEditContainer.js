@@ -156,8 +156,8 @@ class TeamEditContainer extends React.Component {
     }
 
     return (
-      <form id='team-form' onSubmit={this.handleSubmit}>
-        <h1> Edit Team Info </h1>
+      <form className="row" id='team-form' onSubmit={this.handleSubmit}>
+        <h1 className="form-header"> Edit Team Info </h1>
         {errorDiv}
          <TeamFormTile
             name="name"
@@ -214,7 +214,7 @@ class TeamEditContainer extends React.Component {
             </ul>
           </aside>
         </section>
-        <button type="submit" value="submit">Save and Submit</button>
+        <button className="button" type="submit" value="submit">Save and Submit</button>
       </form>
     )
   }

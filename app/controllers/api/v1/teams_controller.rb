@@ -2,12 +2,19 @@ class Api::V1::TeamsController < ApiController
    before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    render json: Team.all.sort
+    # binding.pry
+    # use meetup parser
+    # render json: Team.all.sort
+    render json: {
+      teams: Team.all.sort
+      # meetup_teams: MeetupParser.search
+    }
   end
 
   def show
     render json: {
-      team: Team.find(params[:id])
+      team: Team.find(params[:id]),
+      # meetup_team: MeetupParser.find(params[:id])
     }
   end
 
@@ -34,6 +41,12 @@ class Api::V1::TeamsController < ApiController
       render json: {errors: edit_team.errors}
     end
   end
+
+  # def search
+  #   # teams = Team.where("city ILIKE ? OR description ILIKE ?", "%#{params['search_string']}%", "%#{params['search_string']}%")
+  #   teams = Team.where("city ILIKE ?" ,  "%#{params['search_string']}%")
+  #   render json: teams
+  # end
 
   private
 

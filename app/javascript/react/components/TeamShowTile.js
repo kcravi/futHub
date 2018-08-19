@@ -3,11 +3,12 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const TeamShowTile = props => {
   let image = ''
-  if(props.image){
-    image = <img src={props.image.url} />
-  } else {
-    image = <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" />
+  if(props.url){
+    image = <img src={props.url} />
+  } else if(props.photo) {
+    image = <img src={props.photo.url} />
   }
+
   return(
     <div>
       <h2> {props.name} </h2>
@@ -29,9 +30,9 @@ const TeamShowTile = props => {
             </ul>
           </TabList>
 
-          <div className="tab">
+          <div className="tabpanel">
             <TabPanel>
-              <p>{props.description}</p>
+              <p >{props.description}</p>
             </TabPanel>
             <TabPanel>
               <li>Ravi KC</li>
