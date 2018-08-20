@@ -11,6 +11,7 @@ class TournamentShowContainer extends Component {
   }
 
   componentDidMount(){
+    debugger
     fetch(`/api/v1/tournaments/${this.props.params.id}.json`, {
       credentials: 'same-origin'
     })
@@ -25,6 +26,7 @@ class TournamentShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      debugger
       this.setState({
         tournament: body.tournament
       })
@@ -33,6 +35,7 @@ class TournamentShowContainer extends Component {
   }
 
   render(){
+    debugger
     return(
       <div>
         <TournamentShowTile
@@ -47,6 +50,7 @@ class TournamentShowContainer extends Component {
           description={this.state.tournament.description}
           website={this.state.tournament.website}
           url={this.state.tournament.url}
+          photo={this.state.tournament.photo}
           fee={this.state.tournament.fee}
           awards={this.state.tournament.awards}
           status={this.state.tournament.status}
@@ -57,7 +61,7 @@ class TournamentShowContainer extends Component {
             Join
         </button>
         <button className="button">
-          Edit 
+          Edit
         </button>
      </div>
     )

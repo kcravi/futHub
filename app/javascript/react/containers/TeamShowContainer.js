@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
+
 import TeamShowTile from '../components/TeamShowTile';
+import DeleteTeamButton from '../components/DeleteTeamButton';
 
 class TeamShowContainer extends Component {
   constructor(props){
@@ -8,6 +11,7 @@ class TeamShowContainer extends Component {
     this.state={
       team: {}
     }
+    this.deleteTeam = this.deleteTeam.bind(this)
   }
 
   componentDidMount(){
@@ -30,6 +34,28 @@ class TeamShowContainer extends Component {
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+
+  deleteTeam() {
+    fetch(`/api/v1/teams/${this.props.params.id}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json',
+      'X-Requested-With': 'XHMLttpRequest' },
+      method: 'DELETE',
+    })
+      .then(response => {
+        if(response.ok){
+          return response
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage)
+          throw(error)
+        }
+      })
+      .then(response => response.json())
+      .then(body => browserHistory.push('/teams'))
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render(){
@@ -57,9 +83,9 @@ class TeamShowContainer extends Component {
             Edit
           </button>
         </Link>
-        <button className="button">
-            Delete
-        </button>
+        <DeleteTeamButton
+          deleteTeam={this.deleteTeam}
+        />
      </div>
     )
   }

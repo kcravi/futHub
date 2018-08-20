@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :teams, only: [:index, :show, :new, :create, :edit, :update]
+  resources :teams
   resources :meetups, only: [:index]
 
   namespace :api do
@@ -12,14 +12,14 @@ Rails.application.routes.draw do
       get "/meetups/search", to: "meetups#search"
       # post "/teams/search", to: "teams#search"
       # get "/teams/search", to: "teams#search"
-      resources :teams, only: [:index, :show, :new, :create, :edit, :update]
+      resources :teams
     end
   end
 
-  resources :tournaments, only: [:index, :show]
+  resources :tournaments, only: [:index, :show, :new, :create]
   namespace :api do
     namespace :v1 do
-      resources :tournaments, only: [:index, :show]
+      resources :tournaments, only: [:index, :show, :new, :create]
     end
   end
 

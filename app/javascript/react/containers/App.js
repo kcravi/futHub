@@ -9,6 +9,7 @@ import SearchBarIndexContainer from './SearchBarIndexContainer'
 
 import TournamentIndexContainer from './TournamentIndexContainer'
 import TournamentShowContainer from './TournamentShowContainer'
+import TournamentFormContainer from './TournamentFormContainer'
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
         <Route path='/meetups' component={SearchBarIndexContainer} />
         <Route path='/meetups/:id' component={TeamShowContainer} />
         <Route path='/tournaments' component={TournamentIndexContainer} />
+        <Route path='/tournaments/new' component={TournamentFormContainer} />
         <Route path='/tournaments/:id' component={TournamentShowContainer} />
         <Route path='/teams' component={TeamIndexContainer} />
         <Route path='/teams/new' component={TeamFormContainer} />

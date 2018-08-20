@@ -58,6 +58,9 @@ class TeamIndexContainer extends Component {
         </Link>
         <br/><br/><br/>
         <TournamentIndexContainer />
+        <Link to='/tournaments/new'>
+          <button className="button"> Create a New Tournament </button>
+        </Link>
       </div>
     )
   }
