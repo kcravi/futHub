@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pry'
 
 class MeetupParser
   attr_reader :meetups
