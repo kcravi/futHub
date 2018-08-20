@@ -8,7 +8,7 @@ const DeleteTeamButton = props => {
     }
   }
   return(
-    <button className="button" onClick={onClickAction}>
+    <button className="snip1287" onClick={onClickAction}>
       Delete
     </button>
   )

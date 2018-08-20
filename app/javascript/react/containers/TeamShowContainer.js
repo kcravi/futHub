@@ -75,17 +75,17 @@ class TeamShowContainer extends Component {
           photo={this.state.team.photo}
         />
         <br/><br/>
-        <button className="button">
+        <button className="snip1287">
             Join
         </button>
         <Link to={`/teams/${this.state.team.id}/edit`}>
-          <button className="button">
+          <button className="snip1287">
             Edit
           </button>
         </Link>
-        <DeleteTeamButton
-          deleteTeam={this.deleteTeam}
-        />
+          <DeleteTeamButton
+            deleteTeam={this.deleteTeam}
+          />
      </div>
     )
   }

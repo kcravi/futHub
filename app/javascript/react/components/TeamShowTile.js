@@ -14,12 +14,12 @@ const TeamShowTile = props => {
       <h2> {props.name} </h2>
       <div className="club-info">
         {props.city}, {props.state}, {props.zipcode}
-        <div> Website: {props.website} </div>
-        <div> Contact number: {props.phone_number} </div>
+        <div> {props.website} </div>
+        <div> {props.phone_number} </div>
       </div>
+      <br/>
       <div className="show-page-image"> {image} </div>
-
-      <section>
+      <section className="tab">
         <Tabs>
           <TabList>
             <ul className="snip1211">
@@ -29,10 +29,9 @@ const TeamShowTile = props => {
               <Tab>Contact</Tab>
             </ul>
           </TabList>
-
           <div className="tabpanel">
             <TabPanel>
-              <p >{props.description}</p>
+              <p>{props.description}</p>
             </TabPanel>
             <TabPanel>
               <li>Ravi KC</li>

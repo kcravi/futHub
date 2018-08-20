@@ -54,12 +54,12 @@ class TeamIndexContainer extends Component {
           {teams}
         </div>
         <Link to='/teams/new'>
-          <button className="button"> Make a New Team </button>
+          <button className="snip1287"> Make a New Team </button>
         </Link>
         <br/><br/><br/>
         <TournamentIndexContainer />
         <Link to='/tournaments/new'>
-          <button className="button"> Create a New Tournament </button>
+          <button className="snip1287"> Create a New Tournament </button>
         </Link>
       </div>
     )

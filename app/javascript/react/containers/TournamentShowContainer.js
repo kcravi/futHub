@@ -56,11 +56,10 @@ class TournamentShowContainer extends Component {
           status={this.state.tournament.status}
           types={this.state.tournament.types}
         />
-        <br/><br/>
-        <button className="button">
+        <button className="snip1287">
             Join
         </button>
-        <button className="button">
+        <button className="snip1287">
           Edit
         </button>
      </div>

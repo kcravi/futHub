@@ -17,14 +17,16 @@ const TournamentShowTile = props => {
       <br/>
       <div className="show-page-image"> {image} </div>
       <br/>
-      <div> Description: {props.description} </div>
-      <div> Types: {props.types} </div>
-      <div> Fee: {props.fee} </div>
-      <div> Awards: {props.awards} </div>
-      <div> Organized By: {props.organizer} </div>
-      <br/><br/>
-      <div> Venue: {props.st}, {props.city}, {props.city}, {props.state}, {props.zipcode} </div>
-      <div> Status: {props.status} </div>
+      <div className="tournament-show">
+        <div> <strong>Description</strong>:  {props.description} </div>
+        <div> <strong>Types:</strong>  {props.types} </div>
+        <div> <strong>Fee:</strong>  {props.fee} </div>
+        <div> <strong>Awards:</strong>  {props.awards} </div>
+        <div> <strong>Organized By:</strong>  {props.organizer} </div>
+        <br/>
+        <div> <strong>Venue:</strong>  {props.st}, {props.city}, {props.state}, {props.zipcode} </div>
+        <div> <strong>Status:</strong>  {props.status} </div>
+      </div>
     </div>
   )
 }

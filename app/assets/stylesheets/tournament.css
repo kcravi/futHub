@@ -75,11 +75,11 @@ h2 {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #d84e4e;
+  background: #e5d9d7;
   content: '';
-  background: -moz-linear-gradient(90deg, #d84e4e 0%, #d60404 100%, #d60404 100%);
-  background: -webkit-linear-gradient(90deg, #d84e4e 0%, #d60404 100%, #d60404 100%);
-  background: linear-gradient(90deg, #d84e4e 0%, #d60404 100%, #d60404 100%);
+  background: -moz-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
+  background: -webkit-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
+  background: linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
   opacity: 1;
   z-index: -1;
 }
@@ -119,4 +119,12 @@ h2 {
   margin-right: 10px;
   box-shadow: 5px 5px 20px rgba(134, 198, 237, 0.35);
   float: right;
+}
+
+.tournament-show {
+  border: 1px black solid;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 1em 5em;
+  background-color: #dce7ed;
 }

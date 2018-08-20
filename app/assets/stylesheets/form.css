@@ -10,6 +10,43 @@
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
   margin: auto;
   margin-top: 5em;
+  width: 600px;
+  background-color: #c3cddd;
+  height: 43rem;
+}
+
+#tournament-form{
+  border-style: solid;
+  border-color: #666666;
+  border-width: .3em;
+  border-radius: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  margin-top: 5em;
+  width: 600px;
+  background-color: #c3cddd;
+  height: 62rem;
+}
+
+#signin-form {
+  border-style: solid;
+  border-color: #666666;
+  border-width: .3em;
+  border-radius: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  margin-top: 5em;
+  width: 400px;
+  background-color: #c3cddd;
+  height: 22rem;
 }
 
 .form-header{
@@ -22,4 +59,16 @@
   text-align: center;
   width: 200px;
   float: right;
+}
+
+.dropzone {
+  float: left;
+  margin-left: 15px;
+  width: 10px;
+  height: 10px;
+  padding: -10;
+}
+
+.dropzone-content {
+  padding: 20px;
 }

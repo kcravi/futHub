@@ -63,12 +63,9 @@ class SearchBarIndexContainer extends Component {
       <div className="container">
         <h2>Team List</h2>
       </div>
-        <div className="wrapper">
-          {teams}
-        </div>
-      <Link to='/teams/new'>
-        <button className="button"> Make a New Team </button>
-      </Link>
+      <div className="wrapper">
+        {teams}
+      </div>
      </div>
     )
   }

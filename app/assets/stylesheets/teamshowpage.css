@@ -18,6 +18,9 @@
 
 .tabpanel {
   border: 1px black solid;
+  border-radius: 5px;
   padding: 1em;
+  margin: 1em 5em;
   text-align: center;
+  background-color: #dce7ed;
 }

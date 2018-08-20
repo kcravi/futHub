@@ -147,95 +147,130 @@ class TournamentFormContainer extends React.Component {
     }
 
     return (
-      <form className="row" id='team-form' onSubmit={this.handleSubmit}>
-        <h1 className="form-header"> Add New Tournament </h1>
+      <form id='tournament-form' onSubmit={this.handleSubmit}>
+        <h1 className="form-header"> Create New Tournament </h1>
         {errorDiv}
 
-       <TournamentFormTile
-          name="name"
-          label="Tournament Name *"
-          content={this.state.name}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="organizer"
-          label="Organizer *"
-          content={this.state.organizer}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="street"
-          label="Street *"
-          content={this.state.street}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="city"
-          label="City *"
-          content={this.state.city}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="state"
-          label="State *"
-          content={this.state.state}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="zipcode"
-          label="Zipcode *"
-          content={this.state.zipcode}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="description"
-          label="Description *"
-          content={this.state.description}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="website"
-          label="Website"
-          content={this.state.website}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="fee"
-          label="Fee *"
-          content={this.state.fee}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="awards"
-          label="Awards *"
-          content={this.state.awards}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="status"
-          label="Status *"
-          content={this.state.status}
-          handlerFunction={this.handleChange}
-        />
-       <TournamentFormTile
-          name="types"
-          label="Types *"
-          content={this.state.types}
-          handlerFunction={this.handleChange}
-        />
-       <section>
-        <div className="dropzone">
-          <Dropzone onDrop={this.onDrop}>
-            <p>Try dropping some files here, or click to select files to upload.</p>
-          </Dropzone>
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="name"
+            label="Tournament Name *"
+            content={this.state.name}
+            handlerFunction={this.handleChange}
+          />
         </div>
-        <aside>
-          <h2>Dropped files</h2>
-          <ul>
-            {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
-          </ul>
-        </aside>
-       </section>
+
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="organizer"
+            label="Organizer *"
+            content={this.state.organizer}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="description"
+            label="Description *"
+            content={this.state.description}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-8 column">
+         <TournamentFormTile
+            name="street"
+            label="Street *"
+            content={this.state.street}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-4 column">
+         <TournamentFormTile
+            name="city"
+            label="City *"
+            content={this.state.city}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-4 column">
+         <TournamentFormTile
+            name="state"
+            label="State *"
+            content={this.state.state}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-8 column">
+         <TournamentFormTile
+            name="zipcode"
+            label="Zipcode *"
+            content={this.state.zipcode}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="website"
+            label="Website"
+            content={this.state.website}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="awards"
+            label="Awards *"
+            content={this.state.awards}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TournamentFormTile
+            name="types"
+            label="Types *"
+            content={this.state.types}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-6 column">
+         <TournamentFormTile
+            name="fee"
+            label="Fee *"
+            content={this.state.fee}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-6 column">
+         <TournamentFormTile
+            name="status"
+            label="Status *"
+            content={this.state.status}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <section>
+          <div className="dropzone">
+            <Dropzone onDrop={this.onDrop}>
+              <p>Try dropping some files here, or click to select files to upload.</p>
+            </Dropzone>
+          </div>
+          <aside>
+            <ul>
+              {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
+            </ul>
+          </aside>
+         </section>
        <button className="button" type="submit">Submit</button>
       </form>
     )

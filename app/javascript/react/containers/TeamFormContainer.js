@@ -132,65 +132,86 @@ class TeamFormContainer extends React.Component {
     }
 
     return (
-      <form className="row" id='team-form' onSubmit={this.handleSubmit}>
+      <form id='team-form' onSubmit={this.handleSubmit}>
         <h1 className="form-header"> Add New Team </h1>
         {errorDiv}
 
-       <TeamFormTile
-          name="name"
-          label="Team Name *"
-          content={this.state.name}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="city"
-          label="City *"
-          content={this.state.city}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="state"
-          label="State *"
-          content={this.state.state}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="zipcode"
-          label="Zipcode *"
-          content={this.state.zipcode}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="description"
-          label="Description *"
-          content={this.state.description}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="website"
-          label="Website"
-          content={this.state.website}
-          handlerFunction={this.handleChange}
-        />
-       <TeamFormTile
-          name="phone_number"
-          label="Phone  Number"
-          content={this.state.phone_number}
-          handlerFunction={this.handleChange}
-        />
+       <div className="small-12 column">
+         <TeamFormTile
+            name="name"
+            label="Team Name *"
+            content={this.state.name}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-6 column">
+         <TeamFormTile
+            name="city"
+            label="City *"
+            content={this.state.city}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-3 column">
+         <TeamFormTile
+            name="state"
+            label="State *"
+            content={this.state.state}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-3 column">
+         <TeamFormTile
+            name="zipcode"
+            label="Zipcode *"
+            content={this.state.zipcode}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TeamFormTile
+            name="description"
+            label="Description *"
+            content={this.state.description}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TeamFormTile
+            name="website"
+            label="Website"
+            content={this.state.website}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
+        <div className="small-12 column">
+         <TeamFormTile
+            name="phone_number"
+            label="Phone  Number"
+            content={this.state.phone_number}
+            handlerFunction={this.handleChange}
+          />
+        </div>
+
        <section>
         <div className="dropzone">
           <Dropzone onDrop={this.onDrop}>
-            <p>Try dropping some files here, or click to select files to upload.</p>
+            <p className="dropzone-content">Try dropping some files here, or click to select files to upload.</p>
           </Dropzone>
         </div>
         <aside>
-          <h2>Dropped files</h2>
           <ul>
             {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
           </ul>
         </aside>
        </section>
+
        <button className="button" type="submit">Submit</button>
       </form>
     )

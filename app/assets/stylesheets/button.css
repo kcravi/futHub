@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:600);
+.snip1287 {
+  font-family: 'Raleway', Arial, sans-serif;
+  border: none;
+  background-color: #20638f;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0px 40px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  line-height: 2.7em;
+  font-weight: 600;
+  font-size: 1em;
+  outline: none;
+  position: relative;
+  font-size: 16px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  float: right;
+}
+.snip1287:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: inherit;
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.snip1287:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  background-color: inherit;
+  border-radius: 10px;
+  z-index: -1;
+  box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.75);
+}
+.snip1287:hover:after,
+.snip1287.hover:after {
+  height: 100%;
+}
