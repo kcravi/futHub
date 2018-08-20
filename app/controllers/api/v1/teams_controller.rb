@@ -48,6 +48,15 @@ class Api::V1::TeamsController < ApiController
   #   render json: teams
   # end
 
+  def destroy
+    delete_team = Team.find(params[:id])
+    if delete_team.destroy
+      render json: {message: 'Deleted Successfully'}
+    else
+      render json: {error: 'Delete Failed'}, status: 422
+    end
+  end
+
   private
 
   def team_params

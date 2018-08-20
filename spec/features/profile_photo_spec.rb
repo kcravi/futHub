@@ -5,6 +5,7 @@ feature "profile photo" do
     visit root_path
     click_link "Sign Up"
 
+    fill_in "Username", with: "ashleymartin007"
     fill_in "Email", with: "ash@s-mart.com"
     fill_in "Password", with: "boomstick!3vilisd3ad"
     fill_in "Password confirmation", with: "boomstick!3vilisd3ad"

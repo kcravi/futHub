@@ -40,22 +40,19 @@ class TournamentIndexContainer extends Component {
           city={tournament.city}
           state={tournament.state}
           url={tournament.url}
+          photo={tournament.photo}
         />
       )
     })
 
     return(
       <div>
-        <div>
-          <div className="container">
-            <h2>Tournament List</h2>
-          </div>
-          <div className="wrapper">
-            {tournaments}
-          </div>
-          <button className="button"> Create a New Tournament </button>
+        <div className="container">
+          <h2>Tournament List</h2>
         </div>
-          <br/><br/><br/>
+        <div className="wrapper">
+          {tournaments}
+        </div>
       </div>
     )
   }
