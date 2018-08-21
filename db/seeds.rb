@@ -31,8 +31,8 @@ team3 = Team.find_or_create_by(
   website: "www.medfordfc.com")
 
 tournament1 = Tournament.find_or_create_by(
-  website: "http://sajha.com/sajha/html/index.cfm?eventid=3023",
-  url: "http://sajha.com/sajha/html/images/events/03CE55A0-8D5D-42F4-8DAC-2CF8B5FCB62A.jpeg",
+  website: "https://sajha.com/sajha/html/index.cfm?eventid=3023",
+  url: "https://sajha.com/sajha/html/images/events/03CE55A0-8D5D-42F4-8DAC-2CF8B5FCB62A.jpeg",
   types: "Men's Adult 7-a-side",
   name: "BNFC Annual Cup",
   organizer: "BNFC",
@@ -45,7 +45,7 @@ tournament1 = Tournament.find_or_create_by(
   awards:"$1000 cash prize for 1st place and trophy for 1st and 2nd places.",
   status: "closed")
 tournament2 = Tournament.find_or_create_by(
-  website: "http://sajha.com/sajha/html/index.cfm?eventid=2936",
+  website: "https://sajha.com/sajha/html/index.cfm?eventid=2936",
   url: "https://i.imgur.com/Ti7YIq5.jpg",
   types: "Men's Adult 6-a-side",
   name: "Khasi Cup",
