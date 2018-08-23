@@ -32,7 +32,7 @@ team3 = Team.find_or_create_by(
 
 tournament1 = Tournament.find_or_create_by(
   website: "https://sajha.com/sajha/html/index.cfm?eventid=3023",
-  url: "https://sajha.com/sajha/html/images/events/03CE55A0-8D5D-42F4-8DAC-2CF8B5FCB62A.jpeg",
+  url: "https://i.ytimg.com/vi/UN0qxDqxYOo/maxresdefault.jpg",
   types: "Men's Adult 7-a-side",
   name: "BNFC Annual Cup",
   organizer: "BNFC",
