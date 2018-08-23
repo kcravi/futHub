@@ -8,6 +8,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :username, uniqueness: true, presence: true
 
+  has_many :teams, through: :registrations
+  has_many :registrations
+
   mount_uploader :profile_photo, ProfilePhotoUploader
 
   def will_save_change_to_email?
