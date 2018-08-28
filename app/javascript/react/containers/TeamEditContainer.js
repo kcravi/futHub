@@ -119,27 +119,20 @@ class TeamEditContainer extends React.Component {
        method: 'PATCH',
        body: payload
      })
-     // .then(response => {
-     //     if(response.ok){
-     //       return response
-     //     } else {
-     //       let errorMessage = `${response.status} (${response.statusText})`,
-     //         error = new Error(errorMessage)
-     //         if(response.status == 401){
-     //           alert("You must be signed in to edit a team!!!")
-     //         }
-     //       throw(error)
-     //     }
-     //   })
-       .then(response => response.json())
-       .then(body => {
-         if(body.errors) {
-           error = new Error(body.errors.join(', '))
-           throw(error)
+     .then(response => {
+         if(response.ok){
+           return response
          } else {
-           browserHistory.push(`/teams/${body.team.id}`)
+           let errorMessage = `${response.status} (${response.statusText})`,
+             error = new Error(errorMessage)
+             if(response.status == 401){
+               alert("You must be signed in to edit a team!!!")
+             }
+           throw(error)
          }
        })
+       .then(response => response.json())
+       .then(body => browserHistory.push(`/teams/${body.team.id}`))
        .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
