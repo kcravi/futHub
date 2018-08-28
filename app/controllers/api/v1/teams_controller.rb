@@ -35,7 +35,8 @@ class Api::V1::TeamsController < ApiController
 
   def update
     edit_team = Team.find(params[:id])
-    if edit_team.update(team_params)
+    edit_team.attributes = team_params
+    if edit_team.save
       render json: {team: edit_team}
     else
       render json: {errors: edit_team.errors}, status: :unprocessable_entity
