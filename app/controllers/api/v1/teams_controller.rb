@@ -27,7 +27,7 @@ class Api::V1::TeamsController < ApiController
     if new_team.save
       render json: {team: new_team}
     else
-      render json: {errors: new_team.errors}
+      render json: {errors: new_team.errors}, status: :unprocessable_entity
     end
   end
 
