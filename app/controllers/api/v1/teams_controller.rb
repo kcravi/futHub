@@ -38,7 +38,7 @@ class Api::V1::TeamsController < ApiController
     if edit_team.update(team_params)
       render json: {team: edit_team}
     else
-      render json: {errors: edit_team.errors}
+      render json: {errors: edit_team.errors}, status: :unprocessable_entity
     end
   end
 
