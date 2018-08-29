@@ -18,7 +18,6 @@ export const App = () => {
         <IndexRoute component={TeamIndexContainer} />
         <Route path='/meetups' component={SearchBarIndexContainer} />
         <Route path='/meetups/:id' component={TeamShowContainer} />
-        <Route path='/tournaments' component={TournamentIndexContainer} />
         <Route path='/tournaments/new' component={TournamentFormContainer} />
         <Route path='/tournaments/:id' component={TournamentShowContainer} />
         <Route path='/teams' component={TeamIndexContainer} />

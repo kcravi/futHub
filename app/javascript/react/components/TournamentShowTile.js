@@ -2,7 +2,6 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const TournamentShowTile = props => {
-  debugger
   let image = ''
   if(props.url){
     image = <img src={props.url} />

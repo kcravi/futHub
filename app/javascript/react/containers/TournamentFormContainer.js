@@ -102,7 +102,6 @@ class TournamentFormContainer extends React.Component {
     }
 
     addNewTournament(payload){
-      debugger
       fetch('/api/v1/tournaments.json', {
        credentials: 'same-origin',
        method: 'POST',
@@ -121,9 +120,7 @@ class TournamentFormContainer extends React.Component {
          }
        })
        .then(response => response.json())
-       .then(body => {
-         debugger
-         browserHistory.push(`/tournaments/${body.tournament.id}`)})
+       .then(body => browserHistory.push(`/tournaments/${body.tournament.id}`))
        .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 

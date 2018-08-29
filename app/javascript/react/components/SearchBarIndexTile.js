@@ -5,9 +5,7 @@ const SearchBarIndexTile = props => {
   let image = ''
   if (props.image){
     image = <img src={props.image} />
-  } else {
-    image = <img src="https://www.themuseatdreyfoos.com/wp-content/uploads/2016/07/CASLs15CoachesMeeting.jpg" />
-  }
+  } 
 
   return(
         <figure className="snip1527">

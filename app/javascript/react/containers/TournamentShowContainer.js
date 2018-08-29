@@ -11,7 +11,6 @@ class TournamentShowContainer extends Component {
   }
 
   componentDidMount(){
-    debugger
     fetch(`/api/v1/tournaments/${this.props.params.id}.json`, {
       credentials: 'same-origin'
     })
@@ -26,7 +25,6 @@ class TournamentShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
       this.setState({
         tournament: body.tournament
       })
@@ -35,7 +33,6 @@ class TournamentShowContainer extends Component {
   }
 
   render(){
-    debugger
     return(
       <div>
         <TournamentShowTile
