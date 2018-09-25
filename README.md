@@ -11,11 +11,11 @@ Integrated with MeetupAPI
 Incorporated user/admin authentication/administration and CRUD functionality
 
 Cloud Storage using
-CarrierWave gem
+CarrierWave gem and
 Amazon Simple Storage Service(S3)
 
 Deployed on Heroku
 Visit https://futhub.herokuapp.com
 
 ScreenShots:
-![ScreenShot 1](ScreenShot-1.png)
+![Image 1](./app/assets/images/ScreenShot-1.png?raw=true)
