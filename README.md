@@ -1,26 +1,21 @@
 ![Build Status](https://codeship.com/projects/7bbaf670-7d8d-0136-b445-1605c29d55b0/status?branch=master)
 
-# README
+# Futhub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Futhub is a Ruby on Rails backend and React front based dynamic web application that will find amateur soccer events in and around the city for users to participate and play.
 
-Things you may want to cover:
+Developed using Ruby on Rails, React.js, PostgreSQL, HTML, CSS
 
-* Ruby version
+Integrated with MeetupAPI
 
-* System dependencies
+Incorporated user/admin authentication/administration and CRUD functionality
 
-* Configuration
+Cloud Storage using
+CarrierWave gem
+Amazon Simple Storage Service(S3)
 
-* Database creation
+Deployed on Heroku
+Visit https://futhub.herokuapp.com
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ScreenShots:
+![ScreenShot 1](ScreenShot-1.png)
