@@ -18,4 +18,4 @@ Deployed on Heroku
 Visit https://futhub.herokuapp.com
 
 ScreenShots:
-![Image 1](./app/assets/images/ScreenShot-1.png?raw=true)
+![Image 1](./app/assets/images/ScreenShot-index.png?raw=true)

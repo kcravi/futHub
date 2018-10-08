@@ -8,7 +8,8 @@ class TeamIndexContainer extends Component {
   constructor(props){
     super(props);
     this.state={
-      teams: []
+      teams: [],
+      current_user_id: null
     }
   }
 
@@ -25,7 +26,10 @@ class TeamIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ teams: body.teams })
+        this.setState({
+          teams: body.teams,
+          currentUserId: body.current_user_id
+        })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
@@ -45,6 +49,17 @@ class TeamIndexContainer extends Component {
       )
     })
 
+    let teamLink = ''
+    let onClick = ''
+    if (this.state.currentUserId) {
+      teamLink = '/teams/new'
+    } else {
+      onClick = () => {
+        alert ("You must be signed in to create a New Team")
+      }
+      teamLink = '/teams'
+    }
+
     return(
       <div>
         <div className="container">
@@ -53,8 +68,8 @@ class TeamIndexContainer extends Component {
         <div className="wrapper">
           {teams}
         </div>
-        <Link to='/teams/new'>
-          <button className="snip1287"> Make a New Team </button>
+        <Link to={teamLink}>
+          <button className="snip1287" onClick={onClick}> Make a New Team </button>
         </Link>
         <br/><br/><br/>
         <TournamentIndexContainer />

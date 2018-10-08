@@ -5,15 +5,29 @@ class Api::V1::TeamsController < ApiController
     # binding.pry
     # use meetup parser
     # render json: Team.all.sort
+    current_user_id = current_user.id if current_user
+
     render json: {
-      teams: Team.all.sort
+      teams: Team.all.sort,
+      current_user_id: current_user_id
       # meetup_teams: MeetupParser.search
     }
   end
 
   def show
+    current_user_id = current_user.id if current_user
+    admin_status = false
+    if user_signed_in?
+      admin_status = current_user.admin?
+    end
+    team = Team.find(params[:id])
+    users = team.users
+
     render json: {
-      team: Team.find(params[:id]),
+      team: team,
+      current_user_id: current_user_id,
+      admin_status: admin_status,
+      users: users
       # meetup_team: MeetupParser.find(params[:id])
     }
   end
@@ -75,11 +89,11 @@ class Api::V1::TeamsController < ApiController
     )
   end
 
-  def authorize_user
-    if !user_signed_in? || !current_user.admin?
-      flash[:notice] = "You do not have access to this page."
-      redirect_to root_path
-    end
-  end
+  # def authorize_user
+  #   if !user_signed_in? || !current_user.admin?
+  #     flash[:notice] = "You do not have access to this page."
+  #     redirect_to root_path
+  #   end
+  # end
 
 end

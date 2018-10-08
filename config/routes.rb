@@ -13,14 +13,15 @@ Rails.application.routes.draw do
       # post "/teams/search", to: "teams#search"
       # get "/teams/search", to: "teams#search"
       resources :teams
+      resources :tournaments, only: [:index, :show, :new, :create]
     end
   end
 
   resources :tournaments, only: [:index, :show, :new, :create]
-  namespace :api do
-    namespace :v1 do
-      resources :tournaments, only: [:index, :show, :new, :create]
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     # resources :tournaments, only: [:index, :show, :new, :create]
+  #   end
+  # end
 
 end
