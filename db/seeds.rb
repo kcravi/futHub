@@ -5,15 +5,38 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user1 = FactoryBot.create(
+  :user)
+# user1 = FactoryBot.create(
+#   :user,
+#   admin: true)
+user2 = FactoryBot.create(
+  :user)
+user3 = FactoryBot.create(
+  :user)
 
-team1 = Team.find_or_create_by(
-  name: "BNFC",
-  city:"Somerville",
-  state:"MA",
-  zipcode:"02145",
-  description:"Boston based Nepalese Football Club",
-  phone_number: "(617)817-2590",
-  website: "www.bnfc.com")
+user4 = FactoryBot.create(
+  :user)
+user5 = FactoryBot.create(
+  :user)
+user6 = FactoryBot.create(
+  :user)
+
+team1 = FactoryBot.create(
+  :team,
+  phone_number: "(617)617-6176",
+  website: "www.tibetanfootballclub.com",
+  manager_id: user1.id
+)
+# team1 = Team.find_or_create_by(
+#   name: "BNFC",
+#   city:"Somerville",
+#   state:"MA",
+#   zipcode:"02145",
+#   description:"Boston based Nepalese Football Club",
+#   phone_number: "(617)817-2590",
+#   website: "www.bnfc.com",
+#   manager_id: user1.id)
 team2 = Team.find_or_create_by(
   name: "Tibetan Football Club",
   city:"Somerville",
@@ -21,14 +44,21 @@ team2 = Team.find_or_create_by(
   zipcode:"02145",
   description:"Boston based Tibetan Football Club",
   phone_number: "(617)617-6176",
-  website: "www.tibetanfootballclub.com")
+  website: "www.tibetanfootballclub.com",
+  manager_id: user2.id)
 team3 = Team.find_or_create_by(
   name: "Medford Pickup Soccer",
   city:"Medford",
   state:"MA",
   zipcode:"02149",
-  description:"A pickup group for adults of all ages, skill levels, and backgrounds looking to have fun playing friendly, small-sided, low impact soccer.", phone_number: "(617)617-6666",
-  website: "www.medfordfc.com")
+  description:"A pickup group for adults of all ages, skill levels, and backgrounds looking to have fun playing friendly, small-sided, low impact soccer.",
+  phone_number: "(617)617-6666",
+  website: "www.medfordfc.com",
+  manager_id: user3.id)
+
+  team1.users << [user1, user4]
+  team2.users << [user2, user5]
+  team3.users << [user3, user6]
 
 tournament1 = Tournament.find_or_create_by(
   website: "https://sajha.com/sajha/html/index.cfm?eventid=3023",

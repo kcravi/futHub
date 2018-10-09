@@ -10,7 +10,7 @@ class TeamShowContainer extends Component {
     super(props);
     this.state={
       team: {},
-      adminStatus: false,
+      // adminStatus: false,
       currentUserId: null
     }
     this.deleteTeam = this.deleteTeam.bind(this)
@@ -33,7 +33,7 @@ class TeamShowContainer extends Component {
     .then(body => {
       this.setState({
         team: body.team,
-        adminStatus: body.admin_status,
+        // adminStatus: body.admin_status,
         currentUserId: body.current_user_id
       })
     })
@@ -70,7 +70,8 @@ class TeamShowContainer extends Component {
 
     let editTeam = ''
     let deleteTeam = ''
-    if(this.state.adminStatus) {
+    // if(this.state.adminStatus && this.state.currentUserId === this.state.team.manager_id) {
+    if(this.state.currentUserId === this.state.team.manager_id) {
       editTeam = <button className="snip1287"> Edit </button>
       deleteTeam = <button className="snip1287" onClick={onClickAction}> Delete </button>
     }

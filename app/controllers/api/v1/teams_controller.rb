@@ -2,13 +2,11 @@ class Api::V1::TeamsController < ApiController
    before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    # binding.pry
     # use meetup parser
     # render json: Team.all.sort
     current_user_id = current_user.id if current_user
-
     render json: {
-      teams: Team.all.sort,
+      teams: serialized_teams,
       current_user_id: current_user_id
       # meetup_teams: MeetupParser.search
     }
@@ -16,17 +14,17 @@ class Api::V1::TeamsController < ApiController
 
   def show
     current_user_id = current_user.id if current_user
-    admin_status = false
-    if user_signed_in?
-      admin_status = current_user.admin?
-    end
+    # admin_status = false
+    # if user_signed_in?
+    #   admin_status = current_user.admin?
+    # end
+
     team = Team.find(params[:id])
     users = team.users
-
     render json: {
       team: team,
       current_user_id: current_user_id,
-      admin_status: admin_status,
+      # admin_status: admin_status,
       users: users
       # meetup_team: MeetupParser.find(params[:id])
     }
@@ -38,6 +36,10 @@ class Api::V1::TeamsController < ApiController
 
   def create
     new_team = Team.new(team_params)
+    new_team.manager_id = current_user.id
+    new_team.users << current_user
+    # current_user.update_attribute :admin, true
+
     if new_team.save
       render json: {team: new_team}
     else
@@ -87,6 +89,14 @@ class Api::V1::TeamsController < ApiController
       :website,
       :photo
     )
+  end
+
+  def serialized_teams
+    ActiveModel::Serializer::ArraySerializer.new(Team.all.sort, each_serializer: TeamSerializer)
+  end
+
+  def serialized_team
+    TeamSerializer.new(Team.find(params[:id]))
   end
 
   # def authorize_user

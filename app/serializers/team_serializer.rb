@@ -9,6 +9,7 @@ class TeamSerializer < ActiveModel::Serializer
    :phone_number,
    :photo,
    :url
+   # :manager_id
 
-   has_many :users 
+   has_many :users
 end

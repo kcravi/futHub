@@ -11,13 +11,15 @@ class User < ApplicationRecord
   has_many :teams, through: :registrations
   has_many :registrations
 
+  has_many :teams, foreign_key: :manager_id
+
   mount_uploader :profile_photo, ProfilePhotoUploader
 
-  def will_save_change_to_email?
-    false
-  end
-
-  def will_save_change_to_profile_photo?
-    false
-  end
+  # def will_save_change_to_email?
+  #   false
+  # end
+  #
+  # def will_save_change_to_profile_photo?
+  #   false
+  # end
 end
