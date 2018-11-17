@@ -76,6 +76,16 @@ class TeamShowContainer extends Component {
       deleteTeam = <button className="snip1287" onClick={onClickAction}> Delete </button>
     }
 
+    let joinTeam = ''
+    let onClick = ''
+    if (this.state.currentUserId) {
+      joinTeam = '/teams/new'
+    } else {
+      onClick = () => {
+        alert ("You must be signed up to join this Team")
+      }
+    }
+
     return(
       <div>
         <TeamShowTile
@@ -91,9 +101,11 @@ class TeamShowContainer extends Component {
           url={this.state.team.url}
           photo={this.state.team.photo}
         />
-        <br/><br/>
-
-        <button className="snip1287"> Join </button>
+        <br/>
+        
+        <Link to={joinTeam}>
+          <button className="snip1287"> Join this Team </button>
+        </Link>
 
         <Link to={`/teams/${this.state.team.id}/edit`}>
           {editTeam}

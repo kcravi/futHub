@@ -55,7 +55,7 @@ class TeamIndexContainer extends Component {
       teamLink = '/teams/new'
     } else {
       onClick = () => {
-        alert ("You must be signed in to create a New Team")
+        alert ("You must be signed up to create a New Team")
       }
       teamLink = '/teams'
     }
