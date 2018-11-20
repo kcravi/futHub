@@ -8,8 +8,8 @@ class TeamSerializer < ActiveModel::Serializer
    :website,
    :phone_number,
    :photo,
-   :url
-   # :manager_id
+   :url,
+   :manager_id
 
    has_many :users
 end

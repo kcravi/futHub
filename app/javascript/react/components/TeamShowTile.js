@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const TeamShowTile = props => {
@@ -8,6 +9,16 @@ const TeamShowTile = props => {
   } else if(props.photo) {
     image = <img src={props.photo.url} />
   }
+
+  let onClick = () =>{
+    let payload = {
+      currentUser: props.currentUser,
+      teamId: props.id
+    }
+    props.addMember(payload)
+  }
+
+  let members = props.members.map(member=><li key={member.id}>{member.username}</li>)
 
   return(
     <div>
@@ -34,9 +45,7 @@ const TeamShowTile = props => {
               <p>{props.description}</p>
             </TabPanel>
             <TabPanel>
-              <li>Ravi KC</li>
-              <li>Raju Tamang</li>
-              <li>Achut Thapa</li>
+              {members}
             </TabPanel>
             <TabPanel>
               <p>Sep 2006 </p>
@@ -49,6 +58,11 @@ const TeamShowTile = props => {
           </div>
         </Tabs>
       </section>
+
+      <Link to={`/teams/${props.id}`}>
+        <button className="snip1287" onClick={onClick}> Join this Team </button>
+      </Link>
+
     </div>
   )
 }

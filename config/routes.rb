@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       # get "/teams/search", to: "teams#search"
       resources :teams
       resources :tournaments, only: [:index, :show, :new, :create]
+      resources :registrations, only: [:create]
     end
   end
 

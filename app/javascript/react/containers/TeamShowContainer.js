@@ -11,9 +11,11 @@ class TeamShowContainer extends Component {
     this.state={
       team: {},
       // adminStatus: false,
-      currentUserId: null
+      currentUser: null,
+      members: []
     }
     this.deleteTeam = this.deleteTeam.bind(this)
+    this.addMember = this.addMember.bind(this)
   }
 
   componentDidMount(){
@@ -34,7 +36,8 @@ class TeamShowContainer extends Component {
       this.setState({
         team: body.team,
         // adminStatus: body.admin_status,
-        currentUserId: body.current_user_id
+        currentUser: body.current_user,
+        members: body.team.users
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -61,6 +64,29 @@ class TeamShowContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  addMember(payload) {
+    fetch(`/api/v1/registrations.json`, {
+      body: JSON.stringify(payload),
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json'},
+      method: 'POST',
+    })
+    .then(response => {
+      if(response.ok){
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage)
+        throw(error)
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({members: body.members})
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render(){
     let onClickAction = () => {
       if (window.confirm('Are you sure you want to delete this Team?')) {
@@ -71,19 +97,9 @@ class TeamShowContainer extends Component {
     let editTeam = ''
     let deleteTeam = ''
     // if(this.state.adminStatus && this.state.currentUserId === this.state.team.manager_id) {
-    if(this.state.currentUserId === this.state.team.manager_id) {
+    if(this.state.currentUser && this.state.currentUser.id === this.state.team.manager_id) {
       editTeam = <button className="snip1287"> Edit </button>
       deleteTeam = <button className="snip1287" onClick={onClickAction}> Delete </button>
-    }
-
-    let joinTeam = ''
-    let onClick = ''
-    if (this.state.currentUserId) {
-      joinTeam = '/teams/new'
-    } else {
-      onClick = () => {
-        alert ("You must be signed up to join this Team")
-      }
     }
 
     return(
@@ -100,12 +116,10 @@ class TeamShowContainer extends Component {
           phone_number={this.state.team.phone_number}
           url={this.state.team.url}
           photo={this.state.team.photo}
+          currentUser={this.state.currentUser}
+          members={this.state.members}
+          addMember={this.addMember}
         />
-        <br/>
-        
-        <Link to={joinTeam}>
-          <button className="snip1287"> Join this Team </button>
-        </Link>
 
         <Link to={`/teams/${this.state.team.id}/edit`}>
           {editTeam}

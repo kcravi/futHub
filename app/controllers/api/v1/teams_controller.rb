@@ -13,19 +13,20 @@ class Api::V1::TeamsController < ApiController
   end
 
   def show
-    current_user_id = current_user.id if current_user
+    currentUser = current_user if current_user
+
     # admin_status = false
     # if user_signed_in?
     #   admin_status = current_user.admin?
     # end
 
     team = Team.find(params[:id])
-    users = team.users
+    # users = team.users
     render json: {
-      team: team,
-      current_user_id: current_user_id,
+      team: serialized_team,
+      current_user: currentUser,
       # admin_status: admin_status,
-      users: users
+      # users: users
       # meetup_team: MeetupParser.find(params[:id])
     }
   end
@@ -35,6 +36,7 @@ class Api::V1::TeamsController < ApiController
   end
 
   def create
+    binding.pry
     new_team = Team.new(team_params)
     new_team.manager_id = current_user.id
     new_team.users << current_user
@@ -52,6 +54,7 @@ class Api::V1::TeamsController < ApiController
   def update
     edit_team = Team.find(params[:id])
     edit_team.attributes = team_params
+
     if edit_team.save
       render json: {team: edit_team}
     else
