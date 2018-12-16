@@ -1,0 +1,17 @@
+<div class="photo-main">
+  <div class="row photo-container">
+    <div class="small-12 medium-8 columns">
+        <%= image_tag @photo.large.url %>
+    </div>
+    <div class="medium-4 columns">
+      <ul class="striped-list">
+        <li>Hello World</li>
+        <li>Its Soccer Time</li>
+        <li>Indeed it is!</li>
+      </ul>
+    </div>
+  </div>
+  <%= link_to user_photo_path(@user, @photo_id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } do %>
+    <i class="fas fa-trash-alt fa-lg delete-icon"></i>
+  <% end %>
+</div>

@@ -5,8 +5,8 @@ const TeamIndexTile = props => {
   let image = ''
   if (props.url){
     image = <img src={props.url} />
-  } else if(props.photo.url) {
-    image = <img src={props.photo.url} />
+  } else if(props.photo) {
+    image = <img src={props.photo.large.url} />
   }
 
   return(

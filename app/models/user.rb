@@ -12,8 +12,12 @@ class User < ApplicationRecord
   has_many :registrations
 
   has_many :teams, foreign_key: :manager_id
+  has_many :posts 
+  # has_many :photos
+  # accepts_nested_attributes_for :photos
 
   mount_uploader :profile_photo, ProfilePhotoUploader
+  mount_uploaders :photos, PhotoUploader
 
   # def will_save_change_to_email?
   #   false

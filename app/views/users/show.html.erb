@@ -1,0 +1,62 @@
+  <div class="row feed-page-row">
+    <div class="small-12 medium-3 columns"> <hr/>
+      <h6 style="text-align: center"> <strong><%= @current_user.username.upcase %> ProfilePhoto </strong> </h6>
+      <%- if current_user.photos.length > 0 -%>
+        <%= image_tag current_user.photos[0].medium.url %>
+      <%- else -%>
+        <div class="empty-profile-photo"><br><i class="fas fa-futbol fa-10x"></i></div>
+      <%- end -%>
+      <hr/>
+
+      <h6> <strong>MyTeams</strong></h6>
+      <% @teams.each do |team| %>
+        <li> <a href="/teams/<%= team[0].id%> "><%= team[0].name %></a> </li>
+      <% end %> <hr/>
+      <h6><a href="/users/<%= @current_user.id %>/photos"> <strong>Albums</strong> </a> </h6> <hr/>
+      <h6><a href="#"><strong>Trophies</strong></a> </h6> <hr/>
+      <h6><a href="#"><strong>Messages</strong></a> </h6> <hr/>
+      <h6><a href="#"><strong>SoccerNews</strong></a> </h6> <hr/>
+    </div>
+
+    <div class="small-12 medium-6 columns"> <hr/>
+      <%= form_for [@current_user, @post], url: user_posts_path(@current_user), method: :post do |f| %>
+        <div class="field">
+          <%= f.label :body, "ADD Posts" %>
+          <%= f.text_area :body %>
+
+          <span class="feed-choose-photo">
+            <%= f.file_field :photos, multiple: true %>
+          </span>
+
+          <span class="feed-submit-photo">
+            <%= f.submit "Submit Posts / Photos"%>
+          </span>
+        </div>
+      <% end %> <hr>
+
+      <h4> <strong>NewsFeed</strong> </h4>
+        <% @posts.each do |post| %>
+          <span class='feed-close-button'><%= link_to "X", user_post_path(@current_user, post.id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } %></span>
+          <% if post.photos.length > 0 %>
+            <% post.photos.each do |photo|  %>
+              <%= image_tag photo.large.url %>
+            <% end %>
+          <% end %>
+          <% if !post.body.empty? %>
+            <i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;<%= post.body %>
+          <% end %>
+          <div class="row feed-icons">
+            <div class="small-2 columns"><a href="#"><i class="far fa-comments fa-lg" style="color: purple;"></i></a></div>
+            <div class="small-2 columns"><i class="far fa-thumbs-up fa-lg" style="color: Dodgerblue;"></i></div>
+            <div class="small-2 columns"><i class="far fa-grin-hearts fa-lg" style="color: red; background-color:light-yellow;"></i></div>
+            <div class="small-4 columns feed-date"><%= post.created_at.strftime("%B %d, %Y") %></div>
+          </div><hr>
+        <% end %>
+    </div>
+
+    <div class="small-12 medium-3 columns"> <hr/>
+      <h6> <strong>Tables</strong> </h6>
+      <br><br><br><br><br><br><br><br>
+      <hr>
+    </div>
+  </div>

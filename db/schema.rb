@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_154956) do
+ActiveRecord::Schema.define(version: 2018_12_15_180426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chats", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "meetups", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +34,25 @@ ActiveRecord::Schema.define(version: 2018_10_08_154956) do
     t.integer "members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "body", null: false
+    t.bigint "user_id"
+    t.bigint "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "body"
+    t.string "photos", default: [], array: true
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -87,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_154956) do
     t.boolean "admin", default: false
     t.string "profile_photo"
     t.string "username"
+    t.string "photos", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

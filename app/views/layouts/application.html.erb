@@ -4,6 +4,7 @@
     <title>FutHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_pack_tag    'application' %>
@@ -24,9 +25,11 @@
         <section class="top-bar-section">
           <ul class="right">
             <%- if current_user -%>
-              <%- if current_user.profile_photo.thumb.url -%>
-                <li><%= image_tag current_user.profile_photo.thumb.url %></li>
-              <%- end -%>
+              <% if !current_user.profile_photo.file.nil? %>
+                <li class="thumb-edit"><%= image_tag current_user.profile_photo.thumb.url, {class: "thumb-edit-photo"}%></li>
+              <% else %>
+                <li class="thumb-edit-icon"><i class="fa fa-user-edit fa-lg" style="color: white"></i></li>
+              <% end %>
               <li><%= link_to 'Edit', edit_user_registration_path %></li>
               <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
             <%- else -%>
@@ -38,12 +41,14 @@
       </section>
 
       <section>
-        <ul class="snip1211">
+        <ul class="snip1211 nav-bar-2">
+          <%- if current_user -%>
+            <li><a><%= link_to 'My Page', user_path(current_user.id) %></a></li>
+          <%- end -%>
           <li><a href="/teams">Local Teams</a></li>
           <li><a href="/">Tournaments</a></li>
           <li><a href="#">Fields</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a><%= link_to 'Search Teams', meetups_path %></a></li>
+          <li><a><%= link_to 'Search Meetup Teams', meetups_path %></a></li>
         </ul>
       </section>
     </nav>

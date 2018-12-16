@@ -7,7 +7,7 @@ const TeamShowTile = props => {
   if(props.url){
     image = <img src={props.url} />
   } else if(props.photo) {
-    image = <img src={props.photo.url} />
+    image = <img src={props.photo.large.url} />
   }
 
   let onClick = () =>{

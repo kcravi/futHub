@@ -22,7 +22,7 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   # For Rails 3.1+ asset pipeline compatibility:
 
   # def default_url(*args)
-  #   ActionController::Base.helpers.asset_path("/images/" + [version_name, "photo.png"].compact.join('_'))
+  #   ActionController::Base.helpers.asset_path([thumb, "soccer.jpg"].compact.join('_'))
   # end
 
   # Process files as they are uploaded:
@@ -34,11 +34,11 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
 
-  # def default_url
-  #   "photo.png"
-  # end
   version :thumb do
-    process resize_to_fit: [50, 50]
+    process :resize_to_fit => [50, 50]
+  end
+  version :medium do
+    process :resize_to_fit => [600, 600]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
