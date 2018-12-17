@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   resources :teams
   resources :meetups, only: [:index]
+  resources :users, only: [:show, :create] do
+    resources :photos, only: [:index, :show, :create, :destroy]
+    resources :posts, only: [:create, :destroy]
+  end
 
   namespace :api do
     namespace :v1 do
@@ -15,6 +19,7 @@ Rails.application.routes.draw do
       resources :teams
       resources :tournaments, only: [:index, :show, :new, :create]
       resources :registrations, only: [:create]
+      # resources :users, only: [:show]
     end
   end
 

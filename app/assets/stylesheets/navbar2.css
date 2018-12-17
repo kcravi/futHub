@@ -49,3 +49,16 @@
   top: 0;
   bottom: 0;
 }
+
+.nav-bar-2 {
+  margin: 0;
+}
+
+.thumb-edit, .thumb-edit-icon {
+  margin-top: 0.5em;
+  height: 2em;
+}
+
+.thumb-edit-photo {
+  height: inherit;
+}

@@ -21,9 +21,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
     # For Rails 3.1+ asset pipeline compatibility:
-    ActionController::Base.helpers.asset_path([version_name, "soccer.jpg"].compact.join('_'))
-
-    # "../assets/images/" + [version_name, "default.png"].compact.join('_')
+    ActionController::Base.helpers.asset_path([medium, "soccer.jpg"].compact.join('_'))
+    # "../assets/images/" + [large, "soccer.jpg"].compact.join('_')
   end
 
   # Process files as they are uploaded:
@@ -36,17 +35,60 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]
+  #   process :quality => 100
   # end
+
+  version :large do
+    process :resize_to_fit => [1000, 1000]
+    process :quality => 100
+  end
+
+  version :medium do
+    process :resize_to_limit => [600, 600]
+    process :quality => 100
+  end
+
+  version :small do
+    process :resize_to_fit => [200, 200]
+    process :quality => 100
+  end
+
+  version :thumb do
+    process :resize_to_fit => [50, 50]
+    process :quality => 100
+  end
+
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_whitelist
-  #   %w(jpg jpeg gif png)
+  def extension_whitelist
+    %w(jpg jpeg gif png)
+  end
+  # def content_type_whitelist
+  #   /image\//
   # end
+  def content_type_blacklist
+    ['application/text', 'application/json']
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  def secure_token
+    media_original_filenames_var = :"@#{mounted_as}_original_filenames"
+
+    unless model.instance_variable_get(media_original_filenames_var)
+      model.instance_variable_set(media_original_filenames_var, {})
+    end
+
+    unless model.instance_variable_get(media_original_filenames_var).map{|k,v| k }.include? original_filename.to_sym
+      new_value = model.instance_variable_get(media_original_filenames_var).merge({"#{original_filename}": SecureRandom.uuid})
+      model.instance_variable_set(media_original_filenames_var, new_value)
+    end
+
+    model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
+  end
 end
