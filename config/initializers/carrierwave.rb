@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
       region: ENV["AWS_REGION"]
     }
     # config.fog_directory  = ENV["S3_BUCKET"]
-    # config.fog_public = false
+    config.fog_public = true
 
     if Rails.env.production?
       config.fog_directory  = ENV["S3_BUCKET_PROD"]
