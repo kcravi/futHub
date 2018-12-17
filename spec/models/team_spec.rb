@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Team, type: :model do
  describe "validations" do
-   let!(:team) {FactoryBot.create(:team)}
-   let(:team1) {FactoryBot.build(:team, name: "")}
-   let(:team2) {FactoryBot.build(:team, city: "")}
-   let(:team3) {FactoryBot.build(:team, state: "")}
-   let(:team4) {FactoryBot.build(:team, zipcode: "")}
-   let(:team5) {FactoryBot.build(:team, description: "")}
+   let(:user) {FactoryBot.create(:user)}
+   let!(:team) {FactoryBot.create(:team, manager_id: user.id)}
+   let(:team1) {FactoryBot.build(:team, name: "", manager_id: user.id)}
+   let(:team2) {FactoryBot.build(:team, city: "", manager_id: user.id)}
+   let(:team3) {FactoryBot.build(:team, state: "", manager_id: user.id)}
+   let(:team4) {FactoryBot.build(:team, zipcode: "", manager_id: user.id)}
+   let(:team5) {FactoryBot.build(:team, description: "", manager_id: user.id)}
 
    it "is valid with all fields required filled in" do
      expect(team).to be_valid
