@@ -55,13 +55,10 @@ class SearchBarIndexContainer extends Component {
     <div>
       <div>
         <form className="search-bar" onSubmit={this.handleSubmit}>
-          <label>Search-By-City</label>
+          <label>Search-By-Zipcode/City</label>
             <input type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
             <input type='submit' value='Submit' />
         </form>
-      </div>
-      <div className="container">
-        <h2>Team List</h2>
       </div>
       <div className="wrapper">
         {teams}

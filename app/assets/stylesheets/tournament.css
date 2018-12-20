@@ -1,21 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,600,700);
 
-h2 {
-  text-align: center;
-  margin: auto;
-  font-family: 'Bungee Shade', cursive;
-}
-
-/* .container {
-    width: 100%;
-    float: right;
-}
-
-.box {
-    box-sizing: border-box;
-    width: 50%;
-    float: left;
-} */
 .indexheader{
   line-height: 2rem;
 }
@@ -24,6 +8,7 @@ h2 {
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  margin-left: 1em;
 }
 
 .snip1526 {
@@ -33,7 +18,7 @@ h2 {
   font-family: 'Lato', Arial, sans-serif;
   font-size: 16px;
   margin: 10px 1%;
-  max-width: 310px;
+  max-width: 277px;
   min-width: 250px;
   overflow: hidden;
   position: relative;
@@ -41,6 +26,7 @@ h2 {
   width: 100%;
   height: 100%;
   flex: 0 0 auto;
+  border-radius: 1em;
 }
 
 .snip1526 * {
@@ -54,19 +40,19 @@ h2 {
   max-width: 100%;
   vertical-align: top;
   position: relative;
-  height: 300px;
+  height: 13em;
   width: 100%;
   object-fit: cover;
   overflow: hidden;
 }
 
 .snip1526 figcaption {
-  padding: 25px 20px 25px;
+  padding: 5px 2px 5px;
   position: relative;
   bottom: 0;
   z-index: 1;
   max-height: 5%;
-  height: 120px;
+  height: 4em;
 }
 
 .snip1526 figcaption:before {
@@ -79,7 +65,7 @@ h2 {
   content: '';
   background: -moz-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
   background: -webkit-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
-  background: linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
+  background: linear-gradient(90deg, #6092c800 0%, #6092c83b 100%, #6092c800 100%);
   opacity: 1;
   z-index: -1;
 }
@@ -110,15 +96,6 @@ h2 {
 .snip1526.hover img {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
-}
-
-.button {
-  font-family: 'Merienda';
-  border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  box-shadow: 5px 5px 20px rgba(134, 198, 237, 0.35);
-  float: right;
 }
 
 .tournament-show {

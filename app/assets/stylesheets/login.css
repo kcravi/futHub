@@ -1,3 +1,43 @@
+
+.signin-form {
+  border-radius: 1em;
+  padding: 1em;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  margin-top: 1em;
+  width: 350px;
+  background-color: #FEF0EB;
+  height: 26rem;
+}
+
+.signin-edit-form {
+  border-radius: 1em;
+  padding: 1em;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  margin-top: 1em;
+  width: 450px;
+  background-color: #FEF0EB;
+  height: 50rem;
+}
+
+.signup-form {
+  border-radius: 1em;
+  padding: 1em;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  margin: auto;
+  margin-top: 1em;
+  width: 400px;
+  background-color: #FEF0EB;
+  height: 39rem;
+}
+
+.login-button {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .sign-in {
   margin: 5rem;
 }

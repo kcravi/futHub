@@ -36,7 +36,6 @@ class Api::V1::TeamsController < ApiController
   end
 
   def create
-    binding.pry
     new_team = Team.new(team_params)
     new_team.manager_id = current_user.id
     new_team.users << current_user

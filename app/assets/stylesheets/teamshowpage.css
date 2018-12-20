@@ -1,26 +1,24 @@
-.show-page-image {
-  position: relative;
-  height: 500px;
-  width: 100%;
-  max-width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-  text-align: center;
-}
-
 .club-info {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  border-radius: 1em;
   text-align: center;
+  background-color: #FEF0EB;
+  max-width: 100%;
+  margin: 1em 2em 0 2em;
 }
 
-.tab {
-  margin: 20px;
+.tablist {
+  margin: 0;
+}
+.contact-info {
+  list-style: none;
 }
 
 .tabpanel {
-  border: 1px black solid;
-  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  border-radius: 1em;
   padding: 1em;
-  margin: 1em 5em;
+  margin: 1em;
   text-align: center;
-  background-color: #dce7ed;
+  background-color: #FEF0EB;
 }
