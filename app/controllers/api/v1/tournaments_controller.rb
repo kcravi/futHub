@@ -1,7 +1,11 @@
 class Api::V1::TournamentsController < ApiController
 
   def index
-    render json: {tournaments: Tournament.all.sort}
+    current_user_id = current_user.id if current_user
+    render json: {
+      tournaments: Tournament.all.sort,
+      current_user_id: current_user_id
+    }
   end
 
   def show
@@ -41,7 +45,7 @@ class Api::V1::TournamentsController < ApiController
       :status,
       :types,
       :website,
-      :photo 
+      :photo
     )
   end
 end

@@ -155,89 +155,108 @@ class TeamEditContainer extends React.Component {
       errorDiv = <div className="callout alert">{errorItems}</div>
     }
 
+    let dropzoneStyle = {
+      width: 125,
+      height: 125,
+      borderWidth: 2,
+      borderColor: '#666',
+      borderStyle: 'dashed',
+      borderRadius: 5
+    };
+
     return (
-      <form id='team-form' onSubmit={this.handleSubmit}>
-        <h1 className="form-header"> Add New Team </h1>
+      <div>
         {errorDiv}
+        <ul className="menu align-center">
+          <li className="small-12 medium-8 large-6 columns">
+            <form id='team-form' onSubmit={this.handleSubmit}>
+              <h3 className="form-header"><strong> {`Edit ${this.state.name} Info`} </strong></h3>
+              <div>
+                <TeamFormTile
+                  name="name"
+                  label="Team Name *"
+                  content={this.state.name}
+                  handlerFunction={this.handleChange}
+                />
+              </div>
 
-       <div className="small-12 column">
-         <TeamFormTile
-            name="name"
-            label="Team Name *"
-            content={this.state.name}
-            handlerFunction={this.handleChange}
-          />
-        </div>
+              <div className="row">
+                <div className="small-6 columns city">
+                 <TeamFormTile
+                    name="city"
+                    label="City *"
+                    content={this.state.city}
+                    handlerFunction={this.handleChange}
+                  />
+                </div>
+                <div className="small-6 columns float-right state">
+                  <TeamFormTile
+                     name="state"
+                     label="State *"
+                     content={this.state.state}
+                     handlerFunction={this.handleChange}
+                   />
+                </div>
+              </div>
 
-        <div className="small-6 column">
-         <TeamFormTile
-            name="city"
-            label="City *"
-            content={this.state.city}
-            handlerFunction={this.handleChange}
-          />
-        </div>
+              <div className="row">
+                <div className="small-6 column zipcode">
+                  <TeamFormTile
+                    name="zipcode"
+                    label="Zipcode *"
+                    content={this.state.zipcode}
+                    handlerFunction={this.handleChange}
+                  />
+                </div>
+                <div className="small-6 column phone">
+                 <TeamFormTile
+                    name="phone_number"
+                    label="Phone  Number"
+                    content={this.state.phone_number}
+                    handlerFunction={this.handleChange}
+                  />
+                </div>
+              </div>
 
-        <div className="small-3 column">
-         <TeamFormTile
-            name="state"
-            label="State *"
-            content={this.state.state}
-            handlerFunction={this.handleChange}
-          />
-        </div>
+              <div>
+               <TeamFormTile
+                  name="description"
+                  label="Description *"
+                  content={this.state.description}
+                  handlerFunction={this.handleChange}
+                />
+              </div>
 
-        <div className="small-3 column">
-         <TeamFormTile
-            name="zipcode"
-            label="Zipcode *"
-            content={this.state.zipcode}
-            handlerFunction={this.handleChange}
-          />
-        </div>
+              <div>
+               <TeamFormTile
+                  name="website"
+                  label="Website"
+                  content={this.state.website}
+                  handlerFunction={this.handleChange}
+                />
+              </div><br/>
 
-        <div className="small-12 column">
-         <TeamFormTile
-            name="description"
-            label="Description *"
-            content={this.state.description}
-            handlerFunction={this.handleChange}
-          />
-        </div>
-
-        <div className="small-12 column">
-         <TeamFormTile
-            name="website"
-            label="Website"
-            content={this.state.website}
-            handlerFunction={this.handleChange}
-          />
-        </div>
-
-        <div className="small-12 column">
-         <TeamFormTile
-            name="phone_number"
-            label="Phone  Number"
-            content={this.state.phone_number}
-            handlerFunction={this.handleChange}
-          />
-        </div>
-
-       <section>
-        <div className="dropzone">
-          <Dropzone onDrop={this.onDrop}>
-            <p className="dropzone-content">Try dropping some files here, or click to select files to upload.</p>
-          </Dropzone>
-        </div>
-        <aside>
-          <ul>
-            {this.state.file.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)}
-          </ul>
-        </aside>
-       </section>
-
-       <button className="button" type="submit">Submit</button>
-      </form>
+              <div className="row">
+                <section className="small-8">
+                  <div className="dropzone">
+                    <Dropzone onDrop={this.onDrop} style={dropzoneStyle} >
+                      <p className="dropzone-content">Drop files here, or Click to upload.</p>
+                    </Dropzone>
+                  </div>
+                  <aside>
+                    <ul className="uploaded-file-ul">
+                      {this.state.file.map(f => <li key={f.name}> * {f.name} - {f.size} bytes</li>)}
+                    </ul>
+                  </aside>
+                </section>
+                <div className="small-4">
+                  <button className="button" type="submit">Submit</button>
+                </div>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </div>
     )
   }
 }

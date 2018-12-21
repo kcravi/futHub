@@ -119,6 +119,7 @@ class TeamShowContainer extends Component {
           currentUser={this.state.currentUser}
           members={this.state.members}
           addMember={this.addMember}
+          team={this.state.team}
         />
 
         <Link to={`/teams/${this.state.team.id}/edit`}>

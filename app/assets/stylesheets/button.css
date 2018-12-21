@@ -2,20 +2,20 @@
 .snip1287 {
   font-family: 'Raleway', Arial, sans-serif;
   border: none;
-  background-color: #20638f;
+  background-color: #FE5D26;
   border-radius: 5px;
   color: #ffffff;
   cursor: pointer;
-  padding: 0px 40px;
+  padding: 0px 15px;
   display: inline-block;
-  margin: 15px 30px;
+  margin: 10px 23px;
   text-transform: uppercase;
   line-height: 2.7em;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 1em;
   outline: none;
   position: relative;
-  font-size: 16px;
+  font-size: 12px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   float: right;

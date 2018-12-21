@@ -1,52 +1,31 @@
-#team-form{
-  border-style: solid;
-  border-color: #666666;
-  border-width: .3em;
+#team-form {
   border-radius: 1em;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding: 1em;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
   margin: auto;
-  margin-top: 5em;
-  width: 600px;
-  background-color: #c3cddd;
-  height: 43rem;
+  margin-top: 2em;
+  max-width: 90%;
+  background-color: #FEF0EB;
+  height: 37rem;
 }
 
 #tournament-form{
-  border-style: solid;
-  border-color: #666666;
-  border-width: .3em;
   border-radius: 1em;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding: 1em;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
   margin: auto;
-  margin-top: 5em;
-  width: 600px;
-  background-color: #c3cddd;
-  height: 62rem;
+  margin-top: 2em;
+  background-color: #FEF0EB;
+  max-width: 95%;
+  height: 57rem;
 }
 
-#signin-form {
-  border-style: solid;
-  border-color: #666666;
-  border-width: .3em;
+.callout.alert {
+  font-weight: bold;
+  padding: 1em;
+  margin: 1em 1em 0 1em;
   border-radius: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: .5em;
-  padding-bottom: .5em;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
-  margin: auto;
-  margin-top: 5em;
-  width: 400px;
-  background-color: #c3cddd;
-  height: 22rem;
+  max-width: 90%;
 }
 
 .form-header{
@@ -54,21 +33,33 @@
   text-align: center;
 }
 
+div.city, div.zipcode, div.tour-street, div.tour-state, div.fee {
+  padding-left: 0;
+}
+div.state, div.phone, div.tour-city, div.tour-zipcode, div.status {
+  padding-right: 0;
+}
+
+.dropzone {
+  float: left;
+  margin-left: 0;
+}
+.dropzone-content {
+  padding: 0;
+  top: 4em;
+  position: relative;
+  font-size: 0.8em;
+  text-align: center;
+}
+.uploaded-file-ul {
+  font-size: 0.8em;
+  display: inline-block;
+  margin-left: 0;
+}
+
 .search-bar {
   padding: 10px 30px 10px 10px;
   text-align: center;
   width: 200px;
   float: right;
-}
-
-.dropzone {
-  float: left;
-  margin-left: 15px;
-  width: 10px;
-  height: 10px;
-  padding: -10;
-}
-
-.dropzone-content {
-  padding: 20px;
 }
