@@ -39,68 +39,44 @@
       </div>
 
       <div data-sticky-container>
-      <div class="top-bar show-for-medium" data-sticky data-options="marginTop:0;" style="width:100%;">
-        <div class="top-bar-left">
-            <a href="/" class=" futhub-title-large">futHub</a>
-        </div>
-        <div class="top-bar-right menu">
-          <ul class="snip1211 menu">
-            <%- if current_user -%>
-              <li><a><%= link_to 'My Page', user_path(current_user.id) %></a></li>
-            <%- end -%>
-            <li><a href="/teams">Local Teams</a></li>
-            <li><a href="/tournaments">Tournaments</a></li>
-            <!-- <li><a href="#">Fields</a></li> -->
-            <li><a><%= link_to 'Search Teams', meetups_path %></a></li>
-          </ul>
-          <ul class="dropdown menu align-center" data-dropdown-menu>
-            <li>
+        <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%;">
+          <div class="top-bar-left show-for-medium">
+              <a href="/" class=" futhub-title-large">futHub</a>
+          </div>
+          <div class="top-bar-right menu">
+            <ul class="snip1211 menu vertical medium-horizontal" id="menu-icon-left">
               <%- if current_user -%>
-                <%- if !current_user.profile_photo.file.nil? -%>
-                  <a href="#" class="profile-photo-anchor"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></a>
-                  <ul class="menu">
-                    <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
-                    <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                  </ul>
-                <% else %>
-                  <a href="#" class="menu-icon-anchor-large"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26"></i></a>
-                  <ul class="menu">
-                    <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
-                    <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                  </ul>
-                  <%- end -%>
-              <%- else -%>
-                  <a href="#" style="color:#FE5D26">SIGN IN/UP</a>
-                <ul class="menu">
-                  <li class="edit-signout snip1211" ><%= link_to 'Sign In', new_user_session_path, {class: "edit-sign"} %></li>
-                  <li class="edit-signout snip1211"><%= link_to 'Sign Up', new_user_registration_path, {class: "edit-sign"} %></li>
-                </ul>
+                <li><a><%= link_to 'My Page', user_path(current_user.id) %></a></li>
               <%- end -%>
-            </li>
-          </ul>
+              <li><a href="/teams">Local Teams</a></li>
+              <li><a href="/tournaments">Tournaments</a></li>
+              <!-- <li><a href="#">Fields</a></li> -->
+              <li><a><%= link_to 'Search Teams', meetups_path %></a></li>
+            </ul>
+            <ul class=" menu align-center horizontal medium-vertical" data-dropdown-menu id="menu-icon-right">
+              <li>
+                <%- if current_user -%>
+                  <%- if !current_user.profile_photo.file.nil? -%>
+                    <a href="#" class="profile-photo-anchor"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></a>
+                  <% else %>
+                    <a href="#" class="menu-icon-anchor-large"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26"></i></a>
+                    <%- end -%>
+                    <ul class="menu">
+                      <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
+                      <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                    </ul>
+                <%- else -%>
+                    <a href="#" style="color:#FE5D26">SIGN IN/UP</a>
+                  <ul class="menu">
+                    <li class="edit-signout snip1211" ><%= link_to 'Sign In', new_user_session_path, {class: "edit-sign"} %></li>
+                    <li class="edit-signout snip1211"><%= link_to 'Sign Up', new_user_registration_path, {class: "edit-sign"} %></li>
+                  </ul>
+                <%- end -%>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      </div>
-
-      <ul class="snip1211 vertical medium-horizontal menu hide-for-medium align-center" id="menu-icon-right">
-        <%- if current_user -%>
-          <li><%= link_to 'Edit', edit_user_registration_path %></li>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-        <% end %>
-      </ul>
-
-      <ul class="snip1211 vertical medium-horizontal align-center menu hide-for-medium" id="menu-icon-left">
-        <%- if current_user -%>
-          <li><a><%= link_to 'My Page', user_path(current_user.id) %></a></li>
-        <%- end -%>
-        <li><a href="/teams">Local Teams</a></li>
-        <li><a href="/tournaments">Tournaments</a></li>
-        <!-- <li><a href="#">Fields</a></li> -->
-        <li><a><%= link_to 'Search Teams', meetups_path %></a></li>
-      </ul>
     </nav>
 
     <%- flash.each do |key, value| -%>

@@ -65,7 +65,7 @@
   content: '';
   background: -moz-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
   background: -webkit-linear-gradient(90deg, #e5d9d7 0%, #6092C8 100%, #6092C8 100%);
-  background: linear-gradient(90deg, #6092c800 0%, #6092c83b 100%, #6092c800 100%);
+  background: linear-gradient(90deg, #ffebe6 0%, #fefefe 100%, #fefefe 100%);
   opacity: 1;
   z-index: -1;
 }
