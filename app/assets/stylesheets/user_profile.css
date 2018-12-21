@@ -1,3 +1,7 @@
+#drop {
+  background-color: #F04123;
+}
+
 h6 {
   margin: 0;
 }
@@ -8,7 +12,6 @@ hr {
 
 .feed-page-row {
   margin-left: 2em;
-  /* background-color: #E7E8EC; */
 }
 
 .empty-profile-photo {

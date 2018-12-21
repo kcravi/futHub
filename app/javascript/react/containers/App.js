@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute, Router, browserHistory } from 'react-router';
 
+import HomeIndexContainer from './HomeIndexContainer'
 import TeamIndexContainer from './TeamIndexContainer'
 import TeamShowContainer from './TeamShowContainer'
 import TeamFormContainer from './TeamFormContainer'
@@ -15,9 +16,10 @@ export const App = () => {
   return (
     <Router history={browserHistory} >
       <Route path='/' >
-        <IndexRoute component={TeamIndexContainer} />
+        <IndexRoute component={HomeIndexContainer} />
         <Route path='/meetups' component={SearchBarIndexContainer} />
         <Route path='/meetups/:id' component={TeamShowContainer} />
+        <Route path='/tournaments' component={TournamentIndexContainer} />
         <Route path='/tournaments/new' component={TournamentFormContainer} />
         <Route path='/tournaments/:id' component={TournamentShowContainer} />
         <Route path='/teams' component={TeamIndexContainer} />

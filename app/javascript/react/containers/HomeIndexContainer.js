@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 
 import TeamIndexTile from '../components/TeamIndexTile'
+import TournamentIndexContainer from './TournamentIndexContainer'
+import TeamIndexContainer from './TeamIndexContainer'
 
-class TeamIndexContainer extends Component {
+class HomeIndexContainer extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -48,28 +50,19 @@ class TeamIndexContainer extends Component {
       )
     })
 
-    let newTeamButton = ''
+    let newTeamButton, newTournamentButton = ''
     if (this.state.currentUserId) {
-      newTeamButton = <button className="button team-button"> Make a New Team </button>
+      newTeamButton = <button className="snip1287"> Add a New Team </button>
+      newTournamentButton = <button className="snip1287"> Create Tournament </button>
     }
 
     return(
       <div>
-        <br/>
-        <div className="row team-title-main-div">
-          <div className="small-6 columns team-title-div">
-            <a href="/teams">Local Teams </a>
-          </div>
-          <div className="small-6 columns">
-            <Link to='/teams/new'> {newTeamButton}<br/> </Link>
-          </div>
-        </div>
-        <div className="wrapper callout team-tile">
-          {teams}
-        </div>
+        <TeamIndexContainer />
+        <TournamentIndexContainer />
       </div>
     )
   }
 }
 
-export default TeamIndexContainer
+export default HomeIndexContainer
