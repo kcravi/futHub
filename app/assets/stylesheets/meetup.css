@@ -1,0 +1,20 @@
+.meetup-callout {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  border-radius: 1em;
+  text-align: center;
+  background-color: #FEF0EB;
+  /* margin-left: 0.1em; */
+}
+
+.city-zipcode-splitter {
+  padding: 0.5em 1em 0 1em;
+  font-weight: bold;
+}
+
+div .meetup-header {
+  border-radius: 1em 1em 0 0;
+  height: 2em;
+  font-size: 1em;
+  font-weight: bold;
+  padding-left: 2em;
+}

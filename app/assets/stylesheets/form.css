@@ -58,8 +58,6 @@ div.state, div.phone, div.tour-city, div.tour-zipcode, div.status {
 }
 
 .search-bar {
-  padding: 10px 30px 10px 10px;
-  text-align: center;
-  width: 200px;
-  float: right;
+  margin-right: 2em;
+  float:right;
 }

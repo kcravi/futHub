@@ -16,15 +16,35 @@ body {
 .title-bar-title a:hover {
   color: #000000;
 }
+.title-bar .menu-icon {
+  margin-right: 0.75em;
+}
+
 .top-bar {
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   background-color: #FEF0EB;
+  border-bottom: #FE5D26 0.2em solid;
+  border-top: #FE5D26 0.2em solid;
 }
 .top-bar ul{
   background-color: #FEF0EB;
 }
-.top-bar-left, .top-bar-right {
+.top-bar-right, .top-bar-left {
   display: contents;
+}
+.top-bar-left.show-for-medium > ul > li > a {
+  padding-left: 0;
+}
+.top-bar-right > ul > ul:nth-child(2) {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.top-bar-right > ul > li {
+  padding-top:0.5em;
+}
+.top-bar-right > div > ul > li > ul {
+  text-align: center
 }
 
 .futhub-div {
@@ -38,6 +58,7 @@ body {
   display: inline;
   font-size: 1em;
   font-weight: bold;
+  margin-left: 0.5em;
 }
 .futhub-title-large {
   color: #FE5D26;
@@ -45,18 +66,49 @@ body {
   font-size: 1.2em;
   font-weight: bold;
 }
+.futhub-title-large:hover {
+  color: #000000;
+}
+
+a .futhub-title-large {
+  padding-left: 0;
+}
 
 .is-dropdown-submenu-parent {
   background-color: #FEF0EB;
 }
-.dropdown .is-dropdown-submenu a {
-  background-color: #FEF0EB;
-  color: #FE5D26;
+.is-dropdown-submenu-parent > a {
+    position: relative;
+    padding-left: 3em;
+    margin: auto 1em;
+}
+.is-dropdown-submenu-parent a::after {
+  margin-left: 2em;
 }
 .is-dropdown-submenu {
   min-width: 6em;
   background-color: #FEF0EB;
+  text-align: center;
 }
+.dropdown.menu a {
+  padding: 0.5em;
+}
+
+.is-drilldown {
+  margin: 0 auto;
+}
+.drilldown a {
+  background-color: #FEF0EB;
+ }
+.drilldown .is-drilldown-submenu-parent > a {
+    position: relative;
+    max-width: 8em;
+    padding-left: 1em;
+}
+.drilldown .is-drilldown-submenu {
+  background-color: #FEF0EB;
+}
+
 .edit-signout {
   background-color: #FEF0EB;
   color: #FE5D26;
@@ -68,11 +120,6 @@ body {
  .menu-icon-div {
   height: 1.5em;
   background-color: #FE5D26;
-}
- .menu-icon-anchor-large {
-  margin-top: 0;
-  height: 2em;
-  background-color: #FEF0EB;
 }
 
 .profile-photo-anchor{
@@ -87,16 +134,18 @@ body {
   height: inherit;
   background-color: #FEF0EB;
 }
+.menu-icon-div a:hover {
+  color: black;
+}
 
 .snip1211 {
   font-family: 'Raleway', Arial, sans-serif;
   text-align: center;
-  text-transform: lowercase;
+  text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.5px;
   padding: 0;
   display: contents;
-  /* font-size: 0.7em; */
 }
 .snip1211 * {
   -webkit-box-sizing: border-box;
@@ -107,7 +156,8 @@ body {
 .snip1211 li {
   display: inline-block;
   list-style: outside none none;
-  margin: 0.5em 0.5em;
+  margin-top: 0.5em;
+  margin-right: 2em;
   padding: 0;
 }
 .snip1211 a {
@@ -117,9 +167,7 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-/* .snip1211 a:first-child {
-  color: blue;
-} */
+
 .snip1211 a:before {
   position: absolute;
   content: '';

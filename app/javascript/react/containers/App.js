@@ -6,7 +6,7 @@ import TeamIndexContainer from './TeamIndexContainer'
 import TeamShowContainer from './TeamShowContainer'
 import TeamFormContainer from './TeamFormContainer'
 import TeamEditContainer from './TeamEditContainer'
-import SearchBarIndexContainer from './SearchBarIndexContainer'
+import MeetupSearchBarIndexContainer from './MeetupSearchBarIndexContainer'
 
 import TournamentIndexContainer from './TournamentIndexContainer'
 import TournamentShowContainer from './TournamentShowContainer'
@@ -17,8 +17,7 @@ export const App = () => {
     <Router history={browserHistory} >
       <Route path='/' >
         <IndexRoute component={HomeIndexContainer} />
-        <Route path='/meetups' component={SearchBarIndexContainer} />
-        <Route path='/meetups/:id' component={TeamShowContainer} />
+        <Route path='/meetups' component={MeetupSearchBarIndexContainer} />
         <Route path='/tournaments' component={TournamentIndexContainer} />
         <Route path='/tournaments/new' component={TournamentFormContainer} />
         <Route path='/tournaments/:id' component={TournamentShowContainer} />

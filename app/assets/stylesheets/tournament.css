@@ -12,8 +12,8 @@
 }
 
 .snip1526 {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  /* color: #ffffff; */
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); */
   float: left;
   font-family: 'Lato', Arial, sans-serif;
   font-size: 16px;

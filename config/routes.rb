@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post "/meetups/search", to: "meetups#search"
-      get "/meetups/search", to: "meetups#search"
-      # post "/teams/search", to: "teams#search"
+      # get "/meetups/search", to: "meetups#search"
+      post "/teams/search", to: "teams#search"
       # get "/teams/search", to: "teams#search"
       resources :teams
       resources :tournaments, only: [:index, :show, :new, :create]
@@ -24,10 +24,5 @@ Rails.application.routes.draw do
   end
 
   resources :tournaments, only: [:index, :show, :new, :create]
-  # namespace :api do
-  #   namespace :v1 do
-  #     # resources :tournaments, only: [:index, :show, :new, :create]
-  #   end
-  # end
 
 end

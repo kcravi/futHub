@@ -8,7 +8,7 @@ const TeamIndexTile = props => {
   } else if(props.photo) {
     image = <img src={props.photo.large.url} />
   }
-
+  
   return(
     <figure className="snip1527">
       <div className="image">{image}</div>
