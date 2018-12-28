@@ -10,63 +10,61 @@
   </head>
 
   <body>
-    <nav>
-      <div data-sticky-container>
-        <div class="title-bar" data-sticky data-sticky-on="small" data-options="marginTop:0;" style="width:100%;" data-hide-for="large">
-          <div class="title-bar-left"  data-responsive-toggle="menu-icon-left" >
-            <button class="menu-icon" type="button" data-toggle="menu-icon-left"></button>
-            <div class="title-bar-title">
-              <a href="/" class="futhub-title">futHub</a>
-            </div>
+    <nav data-sticky-container>
+      <div data-sticky data-options="marginTop: 0; stickyOn: small;" style="width:100%">
+        <div class="title-bar"  data-responsive-toggle="menu-icon-right" data-hide-for="large">
+          <div class="title-bar-left title-bar-title">
+            <a href="/" class="futhub-title">futHub</a>
           </div>
-          <div class="title-bar-right" data-responsive-toggle="menu-icon-right">
-            <div class="title-bar-title menu-icon-div" data-toggle="menu-icon-right">
-              <%- if current_user -%>
-                <%- if !current_user.profile_photo.file.nil? -%>
-                  <a href="#" class="profile-photo-anchor tiny dropdown" style="bottom:0.2em"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo"}%></a>
-                <%- else %>
-                  <a href="#" class="menu-icon-div" >
-                    <i class="fa fa-user-edit fa-lg" style="color: white"></i>
-                  </a>
-                <%- end %>
+          <div class="title-bar-title menu-icon-div" data-toggle="menu-icon-right">
+            <% if current_user %>
+              <% if !current_user.profile_photo.file.nil? %>
+                <a href="#" class="profile-photo-anchor tiny dropdown" style="bottom:0.2em"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo"}%></a>
               <% else %>
-                <span> sign-In </span>
+                <a href="#" class="menu-icon-div small-profile-icon"  >
+                  <i class="fa fa-user fa-lg" ></i>
+                </a>
               <% end %>
-              <button class="menu-icon" type="button" style="bottom:0.2em"></button>
-            </div>
+            <% else %>
+              <span> sign-In/Up </span>
+            <% end %>
+            <button class="menu-icon" type="button" style="bottom:0.2em"></button>
           </div>
         </div>
-      </div>
 
-      <div data-sticky-container>
-        <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%;">
-          <div class="top-bar-left show-for-medium">
-              <a href="/" class=" futhub-title-large">futHub</a>
-          </div>
-          <div class="top-bar-right menu">
-            <ul class="snip1211 menu vertical medium-horizontal" id="menu-icon-left">
-              <%- if current_user -%>
-                <li><a><%= link_to 'My Page', user_path(current_user.id) %></a></li>
-              <%- end -%>
-              <li><a href="/teams">Local Teams</a></li>
-              <li><a href="/tournaments">Tournaments</a></li>
-              <!-- <li><a href="#">Fields</a></li> -->
-              <li><a><%= link_to 'Search Teams', meetups_path %></a></li>
+        <div class="top-bar" id="menu-icon-right" >
+          <div class="top-bar-left show-for-large">
+            <ul class="menu">
+              <li><a href="/" class="futhub-title-large">futHub</a></li>
             </ul>
-            <ul class=" menu align-center horizontal medium-vertical" data-dropdown-menu id="menu-icon-right">
-              <li>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu vertical large-horizontal" data-responsive-menu="drilldown large-dropdown">
+              <ul class="snip1211 menu">
+                <%- if current_user -%>
+                  <li><%= link_to 'My Page', user_path(current_user.id) %></li>
+                <%- end -%>
+                <li><a href="/teams">Local Teams</a></li>
+                <li><a href="/tournaments">Tournaments</a></li>
+                <!-- <li><a href="#">Fields</a></li> -->
+                <li><a><%= link_to 'Search Meetup-Teams', meetups_path %></a></li>
+              </ul>
+              <ul class="menu">
                 <%- if current_user -%>
                   <%- if !current_user.profile_photo.file.nil? -%>
-                    <a href="#" class="profile-photo-anchor"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></a>
-                  <% else %>
-                    <a href="#" class="menu-icon-anchor-large"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26"></i></a>
-                    <%- end -%>
-                    <ul class="menu">
-                      <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
-                      <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                    </ul>
+                    <li><a href="#" class="profile-photo-anchor show-for-large"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></a></li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <li>
+                <%- if current_user -%>
+                  <a href="#"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26;"></i></a>
+                  <ul class="menu">
+                    <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
+                    <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                  </ul>
                 <%- else -%>
-                    <a href="#" style="color:#FE5D26">SIGN IN/UP</a>
+                  <a href="#" style="color:#FE5D26">Sign IN/UP</a>
                   <ul class="menu">
                     <li class="edit-signout snip1211" ><%= link_to 'Sign In', new_user_session_path, {class: "edit-sign"} %></li>
                     <li class="edit-signout snip1211"><%= link_to 'Sign Up', new_user_registration_path, {class: "edit-sign"} %></li>

@@ -61,11 +61,10 @@ class Api::V1::TeamsController < ApiController
     end
   end
 
-  # def search
-  #   # teams = Team.where("city ILIKE ? OR description ILIKE ?", "%#{params['search_string']}%", "%#{params['search_string']}%")
-  #   teams = Team.where("city ILIKE ?" ,  "%#{params['search_string']}%")
-  #   render json: teams
-  # end
+  def search
+    teams = Team.where("name ILIKE ? AND city ILIKE ? AND state ILIKE ? AND zipcode ILIKE ?",  "%#{params['name']}%", "%#{params['city']}%", "%#{params['state']}%", "%#{params['zipcode']}%")
+    render json: teams
+  end
 
   def destroy
     delete_team = Team.find(params[:id])

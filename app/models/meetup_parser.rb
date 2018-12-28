@@ -15,12 +15,12 @@ class MeetupParser
     end
   end
 
-  # response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=soccer")
+  # response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=soccer&zip=#{query}")
   def search(query)
-    response = HTTParty.get("https://api.meetup.com/2/groups?key=#{ENV["MEETUP_KEY"]}&topic=soccer&zip=#{query}")
-    count = 0
-    response["results"].each do |meetup|
+    key="#{ENV["MEETUP_KEY"]}&topic=soccer&country=US&state=#{query[:state]}&city=#{query[:city]}&zip=#{query[:zipcode]}"
+    response = HTTParty.get("https://api.meetup.com/2/groups?key=#{key}")
 
+    response["results"].each do |meetup|
       description = remove_html_tags(meetup["description"])
 
       url = ''
@@ -30,14 +30,16 @@ class MeetupParser
         url = meetup["group_photo"]["photo_link"]
       end
 
-      new_team = Team.find_or_create_by(
+      # new_team = Team.find_or_create_by!(
+      new_team = Team.new(
         name: meetup["name"],
         city: meetup["city"],
         state: meetup["state"],
         description: description,
-        url: url
+        url: url,
+        website: meetup["link"],
+        created_at: meetup["created"]
       )
-
       @meetups << new_team
 
     end
