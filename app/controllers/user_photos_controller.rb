@@ -1,4 +1,4 @@
-class PhotosController < ApplicationController
+class UserPhotosController < ApplicationController
   before_action :set_user
 
   def index
@@ -13,15 +13,16 @@ class PhotosController < ApplicationController
 
   def create
     add_more_photos(photos_params[:photos])
+    binding.pry
     flash[:error] = "Failed uploading photos" unless @user.save
-    redirect_to user_photos_path
+    redirect_to user_user_photos_path
     # redirect_to :back
   end
 
   def destroy
     remove_photo_at_index(params[:id].to_i)
     flash[:error] = "Failed deleting photo" unless @user.save
-    redirect_to user_photos_path
+    redirect_to user_user_photos_path
   end
 
   private

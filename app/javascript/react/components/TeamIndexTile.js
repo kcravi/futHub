@@ -5,10 +5,10 @@ const TeamIndexTile = props => {
   let image = ''
   if (props.url){
     image = <img src={props.url} />
-  } else if(props.photo) {
-    image = <img src={props.photo.large.url} />
+  } else if(props.teamProfilePhoto) {
+    image = <img src={props.teamProfilePhoto.url} />
   }
-  
+
   return(
     <figure className="snip1527">
       <div className="image">{image}</div>

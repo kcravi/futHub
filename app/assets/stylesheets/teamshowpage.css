@@ -22,3 +22,82 @@
   text-align: center;
   background-color: #FEF0EB;
 }
+
+.team-show-title {
+  margin: 0;
+}
+.team-profile-pic-div {
+  height: 12em;
+  width: 12em;
+  border: 1px #FE5D26 solid;
+  border-radius: 50%;
+  margin: auto;
+}
+.team-profile-pic-icon {
+  position: relative;
+  top: 0.1em;
+}
+
+.team-side-bar {
+  color: #FE5D26;
+  font-weight: bold;
+}
+
+.team-albums {
+  margin: 1em;
+}
+
+.team-image-div {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+div .team-image {
+
+}
+.prev,
+.next {
+  position: absolute;
+  cursor: pointer;
+  width: auto;
+  padding: 5px;
+  top: 50%;
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.next {
+  right: 2%;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.team-images-ul{
+  text-align: center;
+  margin: 0 1em;
+}
+.team-images-li {
+  display: inline-block;
+  float: left;
+  width: 16.66%;
+  object-fit: fill;
+}
+.team-photo-dropzone {
+}
+.team-photo-dropzone button {
+  margin: 1em;
+}
+
+.team-photo-comments-form {
+  display: grid;
+  top: 80%
+}
+.team-photo-comments-form span input {
+  margin: 0;
+}

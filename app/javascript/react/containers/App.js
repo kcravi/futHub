@@ -5,6 +5,7 @@ import HomeIndexContainer from './HomeIndexContainer'
 import TeamIndexContainer from './TeamIndexContainer'
 import TeamShowContainer from './TeamShowContainer'
 import TeamFormContainer from './TeamFormContainer'
+import TeamPhotosContainer from './TeamPhotosContainer'
 import TeamEditContainer from './TeamEditContainer'
 import MeetupSearchBarIndexContainer from './MeetupSearchBarIndexContainer'
 
@@ -24,6 +25,7 @@ export const App = () => {
         <Route path='/teams' component={TeamIndexContainer} />
         <Route path='/teams/new' component={TeamFormContainer} />
         <Route path='/teams/:id' component={TeamShowContainer} />
+        <Route path='/teams/:id/team_photos' component={TeamPhotosContainer} />
         <Route path='/teams/:id/edit' component={TeamEditContainer} />
       </Route>
     </Router>

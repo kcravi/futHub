@@ -12,7 +12,7 @@
       <% @teams.each do |team| %>
         <li> <a href="/teams/<%= team[0].id%> "><%= team[0].name %></a> </li>
       <% end %> <hr/>
-      <h6><a href="/users/<%= @current_user.id %>/photos"> <strong>Albums</strong> </a> </h6> <hr/>
+      <h6><a href="/users/<%= @current_user.id %>/user_photos"> <strong>Albums</strong> </a> </h6> <hr/>
       <h6><a href="#"><strong>Trophies</strong></a> </h6> <hr/>
       <h6><a href="#"><strong>Messages</strong></a> </h6> <hr/>
       <h6><a href="#"><strong>SoccerNews</strong></a> </h6> <hr/>

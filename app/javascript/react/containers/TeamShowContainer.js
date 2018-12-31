@@ -115,7 +115,7 @@ class TeamShowContainer extends Component {
           website={this.state.team.website}
           phone_number={this.state.team.phone_number}
           url={this.state.team.url}
-          photo={this.state.team.photo}
+          teamProfilePhoto={this.state.team.profile_photo}
           currentUser={this.state.currentUser}
           members={this.state.members}
           addMember={this.addMember}
