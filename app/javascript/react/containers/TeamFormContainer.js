@@ -66,8 +66,8 @@ class TeamFormContainer extends React.Component {
         payload.append("zipcode", this.state.zipcode);
         payload.append("description", this.state.description);
         payload.append("phone_number", this.state.phone_number);
-        payload.append("website", this.state.websit);
-        payload.append("photo", this.state.file[0]);
+        payload.append("website", this.state.website);
+        payload.append("profile_photo", this.state.file[0]);
         this.addNewTeam(payload)
         this.handleClear();
       }

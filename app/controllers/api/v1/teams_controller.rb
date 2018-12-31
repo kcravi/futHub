@@ -40,7 +40,6 @@ class Api::V1::TeamsController < ApiController
     new_team.manager_id = current_user.id
     new_team.users << current_user
     # current_user.update_attribute :admin, true
-
     if new_team.save
       render json: {team: new_team}
     else
@@ -88,7 +87,7 @@ class Api::V1::TeamsController < ApiController
       :description,
       :phone_number,
       :website,
-      :photo
+      :profile_photo
     )
   end
 

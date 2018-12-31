@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-const MeetupShowContainer = props => {
+const MeetupShowTile= props => {
   if (Object.keys(props.team).length === 0 && props.team.constructor === Object){
     return false;
   }
@@ -51,5 +51,4 @@ const MeetupShowContainer = props => {
   )
 }
 
-
-export default MeetupShowContainer
+export default MeetupShowTile

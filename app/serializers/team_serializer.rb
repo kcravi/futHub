@@ -7,7 +7,8 @@ class TeamSerializer < ActiveModel::Serializer
    :description,
    :website,
    :phone_number,
-   :photo,
+   :photos,
+   :profile_photo,
    :url,
    :manager_id
 

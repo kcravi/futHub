@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 // import { browserHistory } from 'react-router'
 
 import MeetupSearchBarIndexTile from '../components/MeetupSearchBarIndexTile';
-import MeetupShowContainer from './MeetupShowContainer'
+import MeetupShowTile from '../components/MeetupShowTile'
 
 let city, state, zipcode = ''
 
@@ -161,7 +161,7 @@ class MeetupSearchBarIndexContainer extends Component {
       {meetupTeams}
 
       <div>
-        <MeetupShowContainer
+        <MeetupShowTile
           team={this.state.team}
         />
       </div>
@@ -170,7 +170,5 @@ class MeetupSearchBarIndexContainer extends Component {
     )
   }
 }
-
-
 
 export default MeetupSearchBarIndexContainer;

@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :teams
+  resources :teams do
+    resources :team_photos, only: [:index, :create]
+  end
+
   resources :meetups, only: [:index]
+
   resources :users, only: [:show, :create] do
-    resources :photos, only: [:index, :show, :create, :destroy]
+    resources :user_photos, only: [:index, :show, :create, :destroy]
     resources :posts, only: [:create, :destroy]
   end
 
@@ -16,7 +20,9 @@ Rails.application.routes.draw do
       # get "/meetups/search", to: "meetups#search"
       post "/teams/search", to: "teams#search"
       # get "/teams/search", to: "teams#search"
-      resources :teams
+      resources :teams do
+        resources :team_photos, only: [:index, :create]
+      end
       resources :tournaments, only: [:index, :show, :new, :create]
       resources :registrations, only: [:create]
       # resources :users, only: [:show]

@@ -65,7 +65,7 @@ class TeamEditContainer extends React.Component {
         payload.append("description", this.state.description);
         payload.append("phone_number", this.state.phone_number);
         payload.append("website", this.state.website);
-        payload.append("photo", this.state.file[0]);
+        payload.append("profile_photo", this.state.file[0]);
         this.editTeam(payload);
         this.handleClear();
       }

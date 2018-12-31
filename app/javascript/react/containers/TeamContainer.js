@@ -43,7 +43,7 @@ class TeamContainer extends Component {
           city={team.city}
           state={team.state}
           url={team.url}
-          photo={team.photo}
+          teamProfilePhoto={team.profile_photo}
         />
       )
     })
