@@ -13,4 +13,5 @@ class TeamSerializer < ActiveModel::Serializer
    :manager_id
 
    has_many :users
+   has_many :posts
 end
