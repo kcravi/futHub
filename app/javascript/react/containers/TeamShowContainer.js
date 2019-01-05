@@ -12,10 +12,13 @@ class TeamShowContainer extends Component {
       team: {},
       // adminStatus: false,
       currentUser: null,
-      members: []
+      members: [],
+      posts: []
     }
     this.deleteTeam = this.deleteTeam.bind(this)
     this.addMember = this.addMember.bind(this)
+    this.addPost = this.addPost.bind(this)
+    this.deleteTeamPost = this.deleteTeamPost.bind(this)
   }
 
   componentDidMount(){
@@ -37,7 +40,8 @@ class TeamShowContainer extends Component {
         team: body.team,
         // adminStatus: body.admin_status,
         currentUser: body.current_user,
-        members: body.team.users
+        members: body.team.users,
+        posts: body.team.posts
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -87,6 +91,38 @@ class TeamShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  addPost(post){
+    this.setState({posts: this.state.posts.concat(post)})
+  }
+
+  deleteTeamPost(postId){
+    fetch(`/api/v1/teams/${this.props.params.id}/posts/${postId}.json`, {
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json',
+      'X-Requested-With': 'XHMLttpRequest' },
+      method: 'DELETE',
+      body: JSON.stringify(postId)
+    })
+    .then(response => {
+      if(response.ok){
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage)
+        throw(error)
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      let remainingPosts = this.state.posts.filter(post=>{
+        return post.id != postId
+      })
+      this.setState({posts: remainingPosts})
+    })
+
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render(){
     let onClickAction = () => {
       if (window.confirm('Are you sure you want to delete this Team?')) {
@@ -119,6 +155,9 @@ class TeamShowContainer extends Component {
           currentUser={this.state.currentUser}
           members={this.state.members}
           addMember={this.addMember}
+          posts={this.state.posts}
+          addPost={this.addPost}
+          deleteTeamPost={this.deleteTeamPost}
           team={this.state.team}
         />
 

@@ -12,7 +12,8 @@ class User < ApplicationRecord
   has_many :registrations, dependent: :destroy
 
   has_many :teams, foreign_key: :manager_id
-  has_many :posts
+  has_many :posts, as: :postable, dependent: :destroy
+
   # has_many :photos
   # accepts_nested_attributes_for :photos
 

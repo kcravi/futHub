@@ -1,9 +1,12 @@
+# Controller for User-Posts Only
+
 class PostsController < ApplicationController
 
   def create
     @current_user = current_user
-    @post = Post.new(post_params)
-    @post.user = @current_user
+    # @post = Post.new(post_params)
+    @post = @current_user.posts.new(post_params)
+    # @post.user = @current_user
 
     if @post.save
       if @post.photos.size > 0
