@@ -108,7 +108,12 @@ class TeamFormContainer extends React.Component {
         }
       })
      .then(response => response.json())
-     .then(body => browserHistory.push(`/teams/${body.team.id}`))
+     .then(body => {
+       browserHistory.push({
+         pathname: `/teams/${body.team.id}`,
+         state: `${body.success_msg}`
+       })
+     })
      .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 

@@ -94,6 +94,17 @@ div .team-image {
   margin: 1em;
 }
 
+.team-page-profile-photo {
+  font-weight: bold;
+  font-style: italic;
+}
+.team-page-profile-photo img {
+  border: #FE5D26 1px solid;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
 .team-photo-comments-form {
   display: grid;
   top: 80%
@@ -105,9 +116,19 @@ div.team-showpage-about {
   background-color: #FE5D26;
   padding: 0.5em;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
-  border-radius: 0.5em;
   margin-bottom: 0.5em;
 }
 .posts-ul {
   list-style-type: none;
+}
+
+div.join-this-team-div > a > button.snip1287 {
+  margin: 0 6em 1.5em;
+}
+
+.deleteIcon {
+  cursor: pointer;
+}
+.about, .members {
+  cursor: pointer;
 }

@@ -2,11 +2,14 @@ import React from 'react';
 import { Link } from 'react-router'
 
 const TeamIndexTile = props => {
+
   let image = ''
   if (props.url){
     image = <img src={props.url} />
   } else if(props.teamProfilePhoto) {
-    image = <img src={props.teamProfilePhoto.url} />
+    image = <img src={props.teamProfilePhoto.medium.url} />
+  } else {
+    image = <i className="fas fa-futbol" style={{fontSize:"13em"}}></i>
   }
 
   return(

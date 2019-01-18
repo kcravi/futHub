@@ -1,7 +1,7 @@
 <div class="photo-main">
   <div class="row photo-container">
     <div class="small-12 medium-8 columns">
-        <%= image_tag @photo.large.url %>
+        <%= image_tag @photo.medium.url %>
     </div>
     <div class="medium-4 columns">
       <ul class="striped-list">
@@ -11,7 +11,9 @@
       </ul>
     </div>
   </div>
-  <%= link_to user_user_photo_path(@user, @photo_id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } do %>
-    <i class="fas fa-trash-alt fa-lg delete-icon"></i>
+  <% if @current_user.id == @user.id %>
+    <%= link_to user_user_photo_path(@user, @photo_id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } do %>
+      <i class="fas fa-trash-alt fa-lg delete-icon"></i>
+    <% end %>
   <% end %>
 </div>

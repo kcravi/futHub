@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import Dropzone from 'react-dropzone';
 
 import TeamFormTile from '../components/TeamFormTile';
+import AlertComponent from '../components/AlertComponent';
 
 class TeamEditContainer extends React.Component {
   constructor(props){
@@ -18,6 +19,7 @@ class TeamEditContainer extends React.Component {
       errors: {},
       file: []
     };
+    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -132,7 +134,12 @@ class TeamEditContainer extends React.Component {
          }
        })
        .then(response => response.json())
-       .then(body => browserHistory.push(`/teams/${body.team.id}`))
+       .then(body => {
+         browserHistory.push({
+           pathname: `/teams/${body.team.id}`,
+           state: `${body.success_msg}`
+         })
+       })
        .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
@@ -163,6 +170,13 @@ class TeamEditContainer extends React.Component {
       borderStyle: 'dashed',
       borderRadius: 5
     };
+
+    // let x;
+    // if (this.state.successMsg){
+    //   x = <AlertComponent
+    //         successMsg={this.state.successMsg}
+    //       />
+    // }
 
     return (
       <div>

@@ -1,42 +1,57 @@
   <div class="row feed-page-row">
     <div class="small-12 medium-3 columns"> <hr/>
-      <h6 style="text-align: center"> <strong><%= @current_user.username.upcase %> ProfilePhoto </strong> </h6>
-      <%- if current_user.photos.length > 0 -%>
-        <%= image_tag current_user.photos[0].medium.url %>
-      <%- else -%>
-        <div class="empty-profile-photo"><br><i class="fas fa-futbol fa-10x"></i></div>
-      <%- end -%>
+      <h6 style="text-align: center"> <strong><%= @user.username.upcase %> </strong> </h6>
+        <%- if !@user.profile_photo.file.nil? -%>
+          <%= image_tag @user.profile_photo.url, :class=>"user-profile-photo" %>
+        <%- else -%>
+          <div class="empty-profile-photo"><i class="fa fa-futbol fa-10x"></i></div>
+        <%- end -%>
       <hr/>
 
-      <h6> <strong>MyTeams</strong></h6>
-      <% @teams.each do |team| %>
-        <li> <a href="/teams/<%= team[0].id%> "><%= team[0].name %></a> </li>
-      <% end %> <hr/>
-      <h6><a href="/users/<%= @current_user.id %>/user_photos"> <strong>Albums</strong> </a> </h6> <hr/>
+      <h6 class="myteams"> <strong>MyTeams</strong></h6>
+      <div class="user-profile-teams striped-list">
+        <% @teams.each do |team| %>
+         <li>
+            <a href="/teams/<%= team[0].id%>">
+              <% if !team[0].profile_photo.nil? %>
+                <%=image_tag team[0].profile_photo.thumb.url %>
+              <% else %>
+                <i class="fa fa-futbol"></i>
+              <% end %>
+              <%= team[0].name %>
+            </a>
+          </li>
+        <% end %>
+      </div><hr/>
+      <h6><a href="/users/<%= @user.id %>/user_photos"> <strong>Albums</strong> </a> </h6> <hr/>
       <h6><a href="#"><strong>Trophies</strong></a> </h6> <hr/>
       <h6><a href="#"><strong>Messages</strong></a> </h6> <hr/>
       <h6><a href="#"><strong>SoccerNews</strong></a> </h6> <hr/>
     </div>
 
     <div class="small-12 medium-6 columns"> <hr/>
-      <%= form_for [@current_user, @post], url: user_posts_path(@current_user), method: :post do |f| %>
-        <div class="field">
-          <%= f.label :body, "ADD Posts" %>
-          <%= f.text_area :body %>
+      <% if @current_user.id == @user.id %>
+        <%= form_for [@current_user, @post], url: user_posts_path(@current_user), method: :post do |f| %>
+          <div class="field">
+            <%= f.label :body, "ADD Posts", {:style=>"font-weight:bold;font-size:1em;"} %>
+            <%= f.text_area :body %>
 
-          <span class="feed-choose-photo">
-            <%= f.file_field :photos, multiple: true %>
-          </span>
+            <span class="feed-choose-photo">
+              <%= f.file_field :photos, multiple: true %>
+            </span>
 
-          <span class="feed-submit-photo">
-            <%= f.submit "Submit Posts / Photos"%>
-          </span>
-        </div>
-      <% end %> <hr>
+            <span class="feed-submit-photo">
+              <%= f.submit "Submit Posts / Photos"%>
+            </span>
+          </div>
+        <% end %><hr>
+      <% end %>
 
       <h4> <strong>NewsFeed</strong> </h4>
         <% @posts.each do |post| %>
-          <span class='feed-close-button'><%= link_to "X", user_post_path(@current_user, post.id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } %></span>
+          <% if @current_user.id == @user.id %>
+            <span class='feed-close-button'><%= link_to "X", user_post_path(@current_user, post.id), :method => :delete, data: { confirm: "Are you sure you want to delete this photo?" } %></span>
+          <% end %>
           <% if post.photos.length > 0 %>
             <% post.photos.each do |photo|  %>
               <%= image_tag photo.large.url %>

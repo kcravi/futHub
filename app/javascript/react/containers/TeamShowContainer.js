@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 
 import TeamShowTile from '../components/TeamShowTile';
 import DeleteTeamButton from '../components/DeleteTeamButton';
+import AlertComponent from '../components/AlertComponent';
 
 class TeamShowContainer extends Component {
   constructor(props){
@@ -13,12 +14,15 @@ class TeamShowContainer extends Component {
       // adminStatus: false,
       currentUser: null,
       members: [],
-      posts: []
+      posts: [],
+      successMsg: ''
     }
     this.deleteTeam = this.deleteTeam.bind(this)
     this.addMember = this.addMember.bind(this)
     this.addPost = this.addPost.bind(this)
     this.deleteTeamPost = this.deleteTeamPost.bind(this)
+    this.closeSuccessMsg = this.closeSuccessMsg.bind(this)
+    // this.handleSuccessMsg = this.handleSuccessMsg.bind(this)
   }
 
   componentDidMount(){
@@ -36,6 +40,14 @@ class TeamShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      if(this.props.location){
+        this.setState({successMsg: this.props.location.state})
+      }
+      browserHistory.replace({
+        pathname: `/teams/${this.props.params.id}`,
+        state: ''
+      })
+
       this.setState({
         team: body.team,
         // adminStatus: body.admin_status,
@@ -64,7 +76,12 @@ class TeamShowContainer extends Component {
         }
       })
       .then(response => response.json())
-      .then(body => browserHistory.push('/teams'))
+      .then(body => {
+        browserHistory.push({
+          pathname: '/',
+          state: `${body.success_msg}`
+        })
+      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -73,7 +90,7 @@ class TeamShowContainer extends Component {
       body: JSON.stringify(payload),
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json'},
-      method: 'POST',
+      method: 'POST'
     })
     .then(response => {
       if(response.ok){
@@ -86,13 +103,17 @@ class TeamShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({members: body.members})
+      this.setState({
+        members: body.members,
+        successMsg: body.success_msg
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   addPost(post){
-    this.setState({posts: this.state.posts.concat(post)})
+    this.state.posts.unshift(post)
+    this.setState({ posts: this.state.posts })
   }
 
   deleteTeamPost(postId){
@@ -117,10 +138,16 @@ class TeamShowContainer extends Component {
       let remainingPosts = this.state.posts.filter(post=>{
         return post.id != postId
       })
-      this.setState({posts: remainingPosts})
+      this.setState({
+        posts: remainingPosts,
+        successMsg: body.success_msg
+      })
     })
-
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  closeSuccessMsg(){
+    this.setState({successMsg: ''})
   }
 
   render(){
@@ -138,8 +165,14 @@ class TeamShowContainer extends Component {
       deleteTeam = <button className="snip1287" onClick={onClickAction}> Delete </button>
     }
 
+    let successMsgDiv = <AlertComponent
+                          successMsg={ this.state.successMsg }
+                          closeSuccessMsg={this.closeSuccessMsg}
+                        />
+
     return(
       <div>
+        {successMsgDiv}
         <TeamShowTile
           key={this.state.team.id}
           id={this.state.team.id}

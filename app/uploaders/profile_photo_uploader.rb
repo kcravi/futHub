@@ -21,9 +21,11 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # For Rails 3.1+ asset pipeline compatibility:
 
-  # def default_url(*args)
-  #   ActionController::Base.helpers.asset_path([thumb, "soccer.jpg"].compact.join('_'))
-  # end
+  def default_url(*args)
+    # For Rails 3.1+ asset pipeline compatibility:
+    ActionController::Base.helpers.asset_path([medium, "soccer.jpg"].compact.join('_'))
+    # "../assets/images/" + [large, "soccer.jpg"].compact.join('_')
+  end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]

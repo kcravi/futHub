@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Dropzone from 'react-dropzone';
+import AlertComponent from './AlertComponent';
 
 class TeamShowTile extends Component {
   constructor(props){
@@ -11,12 +12,14 @@ class TeamShowTile extends Component {
       about: '',
       members: [],
       post: '',
-      files: []
+      files: [],
+      successMsg: ''
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onDrop = this.onDrop.bind(this)
+    this.closeSuccessMsg = this.closeSuccessMsg.bind(this)
   }
 
   handleClick(event){
@@ -66,7 +69,8 @@ class TeamShowTile extends Component {
       this.props.addPost(body.post)
       this.setState({
         post: '',
-        files: []
+        files: [],
+        successMsg: body.success_msg
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -76,6 +80,10 @@ class TeamShowTile extends Component {
    if(files.length > 0) {
      this.setState({ files: files })
    }
+  }
+
+  closeSuccessMsg(){
+    this.setState({successMsg: ''})
   }
 
   render() {
@@ -101,7 +109,7 @@ class TeamShowTile extends Component {
 
     let members, profile_photo;
     if (this.state.members != ''){
-      members = this.state.members.map(member => {
+      members = this.props.members.map(member => {
         if (member.profile_photo.url != '' && member.profile_photo.url != null){
           profile_photo = <img src={member.profile_photo.thumb.url} />
         } else {
@@ -109,7 +117,7 @@ class TeamShowTile extends Component {
         }
         return (
           <li key={member.id}>
-            <a href={`/users/${member.id}`}>{profile_photo}&nbsp;&nbsp;{member.username}</a>
+            <a href={`/users/${member.id}`} className="team-page-profile-photo">{profile_photo}&nbsp;&nbsp;{member.username}</a>
           </li>
         )
       })
@@ -119,13 +127,22 @@ class TeamShowTile extends Component {
                      </div>
 
 
-    let joinTeam=''
-    if(currentUser.id != this.props.team.manager_id){
-      joinTeam = "Join this team"
+    let joinTeamDiv, filterMember;
+    if (this.props.team.users){
+      filterMember = this.props.team.users.filter(u=> {
+        return u.id == currentUser.id
+      })
+      if(currentUser.id != this.props.team.manager_id && filterMember.length==0){
+        joinTeamDiv = <div className="join-this-team-div">
+                        <Link to={`/teams/${this.props.id}`}>
+                          <button className="snip1287" onClick={onClick}> Join This Team </button>
+                        </Link><hr/>
+                      </div>
+      }
     }
 
-    let posts = this.props.posts.map(post=>{
-      let photos;
+    let posts = this.props.posts.map(post=> {
+      let photos, doubleArrow;
       if(post.photos.length > 0){
         photos = post.photos.map(photo=>{
           return (
@@ -133,20 +150,28 @@ class TeamShowTile extends Component {
           )
         })
       }
+      if (post.body == "" || post.body == null){
+        doubleArrow = ''
+      } else {
+        doubleArrow = <i className="fas fa-angle-double-right"></i>
+      }
+      let onClickDeletePost = () => {
+        if (window.confirm('Are you sure you want to delete this Post?')) {
+          this.props.deleteTeamPost(post.id)
+        }
+      }
       return (
         <li key={post.id}>
           {photos}
-          {post.body}
+          {doubleArrow}&nbsp;&nbsp;&nbsp;{post.body}
           <div className="row feed-icons">
             <div className="small-2 columns"><i className="far fa-comments fa-lg" style={{color: "purple" }}></i></div>
             <div className="small-2 columns"><i className="far fa-thumbs-up fa-lg" style={{color: "Dodgerblue"}}></i></div>
             <div className="small-2 columns"><i className="far fa-grin-hearts fa-lg" style={{color: "red", backgroundColor:"light-yellow"}}></i></div>
             <div className="small-5 columns feed-date">{ new Date(post.created_at).toDateString() }</div>
-            <div className="small-1 columns"
-                 onClick={()=>{
-                   {this.props.deleteTeamPost(post.id)}
-                 }}
-                ><i className="far fa-trash-alt" style={{color:"red"}}></i></div>
+            <div className="small-1 columns deleteIcon" onClick={onClickDeletePost}>
+              <i className="far fa-trash-alt" style={{color:"red"}}></i>
+            </div>
           </div><hr/>
         </li>
       )
@@ -169,8 +194,50 @@ class TeamShowTile extends Component {
       borderRadius: 5
     };
 
+    let addPosts;
+    if (this.props.currentUser != null && this.props.currentUser.id == this.props.team.manager_id){
+      addPosts = <form className="team-photo-comments-form" onSubmit={this.handleSubmit}>
+                   <hr/>
+                   <h5> <strong>NewsFeed</strong> </h5>
+                   <span>
+                     <label htmlFor="post"/>
+                       <input
+                         type="text"
+                         placeholder="Add Post"
+                         className="team-photo-comments-form-span"
+                         onChange={this.handleChange}
+                         name="post"
+                         value={this.state.post}
+                       />
+                   </span>
+                   <div className="row">
+                     <section className="small-10 columns">
+                       <div className="dropzone">
+                         <Dropzone onDrop={this.onDrop} multiple={true} style={dropzoneStyle} >
+                           <p className="teamshowpage-dropzone-content">Click to upload photos</p>
+                         </Dropzone>
+                       </div>
+                       <aside>
+                         <ul className="uploaded-file-ul">
+                           {this.state.files.map(f => <li key={f.name}> * {f.name} - {f.size} bytes</li>)}
+                         </ul>
+                       </aside>
+                     </section>
+                     <section className="small-2 columns">
+                       <button className="button" type="submit">Post</button>
+                     </section>
+                   </div>
+                </form>
+    }
+
+    let successMsgDiv = <AlertComponent
+                          successMsg={ this.state.successMsg }
+                          closeSuccessMsg={this.closeSuccessMsg}
+                        />
+
     return(
       <div>
+        {successMsgDiv}
         <div className="row">
           <div className="small-12 medium-4 large-3 columns text-center">
             <hr/>
@@ -186,7 +253,7 @@ class TeamShowTile extends Component {
             <hr/>
             <div className="team-side-bar">
               <div className="about" onClick={this.handleClick}>ABOUT</div><hr/>
-              <div><Link to={`/teams/${this.props.team.id}/team_photos`}>ALBUMS</Link></div><hr/>
+              <div><Link to={`/teams/${this.props.team.id}/team_photos`} style={{color: "#FE5D26"}}>ALBUMS</Link></div><hr/>
               <div className="members" onClick={this.handleClick}>MEMBERS {`(${this.props.members.length})`}</div><hr/>
               <div>TPOPHIES</div><hr/>
               <div>EVENTS</div><hr/>
@@ -194,54 +261,21 @@ class TeamShowTile extends Component {
           </div>
 
           <div className="small-12 medium-8 large-6 columns">
-             <form className="team-photo-comments-form" onSubmit={this.handleSubmit}>
-                <hr/>
-                <h5> <strong>NewsFeed</strong> </h5>
-                <span>
-                  <label htmlFor="post"/>
-                    <input
-                      type="text"
-                      placeholder="Add Post"
-                      className="team-photo-comments-form-span"
-                      onChange={this.handleChange}
-                      name="post"
-                      value={this.state.post}
-                    />
-                </span>
-                <div className="row">
-                  <section className="small-10 columns">
-                    <div className="dropzone">
-                      <Dropzone onDrop={this.onDrop} multiple={true} style={dropzoneStyle} >
-                        <p className="teamshowpage-dropzone-content">Click to upload photos</p>
-                      </Dropzone>
-                    </div>
-                    <aside>
-                      <ul className="uploaded-file-ul">
-                        {this.state.files.map(f => <li key={f.name}> * {f.name} - {f.size} bytes</li>)}
-                      </ul>
-                    </aside>
-                  </section>
-                  <section className="small-2 columns">
-                    <button className="button" type="submit">Post</button>
-                  </section>
-                </div>
-             </form><hr style={{marginTop:0}}/>
+             {addPosts}<hr/>
              {aboutDiv}
              {membersDiv}
-             {image}<br/>
+             {image}<hr/>
+             <h5><strong>POSTS</strong></h5>
              <ul className="posts-ul">
               {posts}
              </ul>
           </div>
 
           <div className="small-12 medium-12 large-3 columns"><hr/>
-            <strong>TABLES</strong>
+            {joinTeamDiv}
+            <div><strong>TABLES</strong></div>
           </div>
         </div><hr/>
-
-        <Link to={`/teams/${this.props.id}`}>
-          <button className="snip1287" onClick={onClick}> {joinTeam} </button>
-        </Link>
       </div>
     )
   }
