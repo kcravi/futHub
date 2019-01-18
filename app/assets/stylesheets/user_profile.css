@@ -14,8 +14,42 @@ hr {
   margin-left: 2em;
 }
 
+.user-profile-photo{
+  border-radius: 50%;
+  height: 12em;
+  width: 12em;
+  margin: 0.5em 0.5em 0;
+  border: 1px #FE5D26 solid;
+}
 .empty-profile-photo {
   text-align: center;
+  margin: 0.5em 0.5em 0;
+}
+
+.myteams {
+  cursor: pointer;
+  color: #197ABB;
+  margin-bottom: 0.5em;
+}
+.user-profile-teams {
+  border: 1px #FE5D26 solid;
+  padding: 0.1em;
+}
+div.striped-list {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+}
+div.striped-list > li:nth-of-type(odd) {
+  background-color: #FE5D26;
+}
+.user-profile-teams li {
+  margin: 0.25em;
+  list-style-type: none;
+}
+.user-profile-teams img {
+  border: #FE5D26 1px solid;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
 }
 
 .feed-choose-photo {
@@ -78,16 +112,17 @@ hr {
 }
 
 ul.striped-list {
-    list-style-type: none;
-    margin: 0 0 0.5em 0;
-    padding: 0;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  list-style-type: none;
+  margin: 0 0 0.5em 0;
+  padding: 0;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
 }
 
 ul.striped-list > li:nth-of-type(odd) {
-    background-color: #fdd8cc ;
+  /* background-color: #fdd8cc ; */
+  background-color: #FE5D26 ;
 }
 
 ul.striped-list > li {
-    padding: 6px;
+  padding: 6px;
 }

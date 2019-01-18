@@ -41,7 +41,7 @@ body {
   margin-right: 1em;
 }
 .top-bar-right > ul > li {
-  padding-top:0.5em;
+  padding-top:0.2em;
 }
 .top-bar-right > div > ul > li > ul {
   text-align: center
@@ -82,9 +82,6 @@ a .futhub-title-large {
     padding-left: 3em;
     margin: auto 1em;
 }
-.is-dropdown-submenu-parent a::after {
-  margin-left: 2em;
-}
 .is-dropdown-submenu {
   min-width: 6em;
   background-color: #FEF0EB;
@@ -92,6 +89,15 @@ a .futhub-title-large {
 }
 .dropdown.menu a {
   padding: 0.5em;
+}
+.dropdown.menu.vertical > li.opens-left > a::after {
+  left: auto;
+}
+.dropdown-edit {
+  text-align: center;
+  /* margin: 0 1em 0.1em; */
+  margin: auto 1em;
+  line-height: 0.5em;
 }
 
 .is-drilldown {
@@ -108,6 +114,10 @@ a .futhub-title-large {
 .drilldown .is-drilldown-submenu {
   background-color: #FEF0EB;
 }
+.drilldown .is-drilldown-submenu-parent > a::after {
+  right: 0.5rem;
+}
+
 
 .edit-signout {
   background-color: #FEF0EB;
@@ -125,17 +135,32 @@ a .futhub-title-large {
 .profile-photo-anchor{
   background-color: #FEF0EB;
 }
+a.profile-photo-anchor.tiny.dropdown {
+  background-color: #FE5D26;
+}
 .profile-photo {
   height: -webkit-fill-available;
-  background-color: #FEF0EB;
+  background-color: #FE5D26;
   vertical-align: bottom;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
 }
 .profile-photo-large {
-  height: inherit;
   background-color: #FEF0EB;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 .menu-icon-div a:hover {
   color: black;
+}
+
+a.username.show-for-large {
+  font-size: small;
+  font-weight: bold;
+  padding: 0;
+  margin-top: 0.2em;
 }
 
 .snip1211 {
@@ -190,4 +215,37 @@ a .futhub-title-large {
   opacity: 1;
   top: 0;
   bottom: 0;
+}
+
+/* FLASH MESSAGES */
+.flash-alert {
+  border-radius: 1rem;
+  border: 1px black solid;
+  font-weight: bold;
+}
+.callout.alert {
+  padding: 0.5em;
+  margin: 0.5rem auto;
+  max-width: 75%;
+  color: red;
+}
+.callout.success {
+  padding: 0.5em;
+  margin: 0.5rem auto;
+  max-width: 75%;
+  color: green;
+}
+.cross-button {
+  margin-left: 1rem;
+  font-size: x-large;
+}
+.react-alert {
+  padding: 0.3em;
+  max-width: 75%;
+  margin: 0.5em auto;
+  text-align: center;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.35);
+  background-color: #FE5D26;
+  border: none;
+
 }

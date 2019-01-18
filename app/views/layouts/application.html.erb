@@ -49,22 +49,23 @@
                 <!-- <li><a href="#">Fields</a></li> -->
                 <li><a><%= link_to 'Search Meetup-Teams', meetups_path %></a></li>
               </ul>
-              <ul class="menu">
+
+              <li class="dropdown-edit">
                 <%- if current_user -%>
                   <%- if !current_user.profile_photo.file.nil? -%>
-                    <li><a href="#" class="profile-photo-anchor show-for-large"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></a></li>
+                    <span href="#" class="profile-photo-anchor show-for-large" style="padding: 0;"><%= image_tag current_user.profile_photo.thumb.url, {class: "profile-photo-large"}%></span>
+                    <a href="#" class="profile-photo-anchor hide-for-large"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26;"></i></a>
+                  <% else %>
+                    <span href="#"><i class="fa fa-user-edit fa-lg show-for-large" style="color: #FE5D26;"></i></span>
+                    <a href="#" class="hide-for-large"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26;"></i></a>
                   <% end %>
-                <% end %>
-              </ul>
-              <li>
-                <%- if current_user -%>
-                  <a href="#"><i class="fa fa-user-edit fa-lg" style="color: #FE5D26;"></i></a>
+                  <a class="username show-for-large"><%= current_user.username %></a>
                   <ul class="menu">
                     <li class="edit-signout snip1211"><%= link_to 'Edit', edit_user_registration_path, {class: "edit-sign"} %></li>
                     <li class="edit-signout snip1211"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
                   </ul>
                 <%- else -%>
-                  <a href="#" style="color:#FE5D26">Sign IN/UP</a>
+                  <a href="#" class="sign-in-up-large" style="color:#FE5D26;">Sign IN/UP</a>
                   <ul class="menu">
                     <li class="edit-signout snip1211" ><%= link_to 'Sign In', new_user_session_path, {class: "edit-sign"} %></li>
                     <li class="edit-signout snip1211"><%= link_to 'Sign Up', new_user_registration_path, {class: "edit-sign"} %></li>
@@ -78,8 +79,11 @@
     </nav>
 
     <%- flash.each do |key, value| -%>
-      <div class="flash flash-<%= key %>">
+      <div data-closable class="callout text-center flash-alert <%= key == 'notice' ? 'success' : 'alert' %>">
         <%= value %>
+        <button class="close" type="button" data-close>
+          <span aria-hidden="true" class="cross-button">&CircleTimes;</span>
+        </button>
       </div>
     <%- end -%>
 

@@ -10,3 +10,8 @@
 //           }
 //       }).resize();
 // });
+$(".user-profile-teams").hide()
+
+$(".myteams").click(function(){
+  $(".user-profile-teams").toggle()
+})

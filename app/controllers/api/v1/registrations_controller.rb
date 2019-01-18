@@ -10,7 +10,8 @@ class Api::V1::RegistrationsController < ApiController
     end
 
     if registration.save
-      render json: {members: team.users}
+      msg = "#{user.username} joined #{team.name} successfully."
+      render json: {members: team.users, success_msg: msg}
     else
       render json: {errors: team.errors}, status: :unprocessable_entity
     end

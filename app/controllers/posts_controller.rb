@@ -13,7 +13,7 @@ class PostsController < ApplicationController
         @current_user.photos += @post.photos
         @current_user.save
       end
-      flash[:notice] = "Post saved successfully."
+      flash[:notice] = "New post posted."
       redirect_to user_path(@current_user)
     else
       flash[:alert] = "Failed to save post."

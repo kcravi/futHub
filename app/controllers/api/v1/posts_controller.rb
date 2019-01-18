@@ -9,7 +9,7 @@ class Api::V1::PostsController < ApiController
         team.photos += post.photos
         team.save
       end
-      render json: {post: post}
+      render json: {post: post, success_msg: "Post added successfully"}
     else
       render json: {errors: post.errors}, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class Api::V1::PostsController < ApiController
     deleted_post.destroy
     deleted_post.photos.try(:remove!)
     if deleted_post.destroy
-      render json: {message: 'Post Deleted Successfully'}
+      render json: {success_msg: 'Post Deleted Successfully'}
     else
       render json: {error: 'Post Failed to Delete'}, status: 422
     end

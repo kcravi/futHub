@@ -14,7 +14,6 @@ class Api::V1::TeamsController < ApiController
 
   def show
     currentUser = current_user if current_user
-
     # admin_status = false
     # if user_signed_in?
     #   admin_status = current_user.admin?
@@ -41,7 +40,8 @@ class Api::V1::TeamsController < ApiController
     new_team.users << current_user
     # current_user.update_attribute :admin, true
     if new_team.save
-      render json: {team: new_team}
+      success_msg = "#{new_team.name.capitalize} successfully created"
+      render json: {team: new_team, success_msg: success_msg}
     else
       render json: {errors: new_team.errors}, status: :unprocessable_entity
     end
@@ -54,7 +54,8 @@ class Api::V1::TeamsController < ApiController
     edit_team.attributes = team_params
 
     if edit_team.save
-      render json: {team: edit_team}
+      success_msg = "#{edit_team.name.capitalize} successfully updated"
+      render json: {team: edit_team, success_msg: success_msg}
     else
       render json: {errors: edit_team.errors}, status: :unprocessable_entity
     end
@@ -68,7 +69,7 @@ class Api::V1::TeamsController < ApiController
   def destroy
     delete_team = Team.find(params[:id])
     if delete_team.destroy
-      render json: {message: 'Deleted Successfully'}
+      render json: {success_msg: "#{delete_team.name.capitalize} deleted successfully"}
     else
       render json: {error: 'Delete Failed'}, status: 422
     end

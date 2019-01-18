@@ -10,8 +10,13 @@ class TeamSerializer < ActiveModel::Serializer
    :photos,
    :profile_photo,
    :url,
-   :manager_id
+   :manager_id,
+   :posts
 
    has_many :users
-   has_many :posts
+   # has_many :posts
+
+   def posts
+    object.posts.order(id: :desc)
+   end
 end
