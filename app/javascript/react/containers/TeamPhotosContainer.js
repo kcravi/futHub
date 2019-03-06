@@ -17,7 +17,6 @@ class TeamPhotosContainer extends Component {
   }
 
   componentDidMount(){
-    debugger
     fetch(`/api/v1/teams/${this.props.params.id}/team_photos.json`)
     .then(response => {
       if (response.ok) {

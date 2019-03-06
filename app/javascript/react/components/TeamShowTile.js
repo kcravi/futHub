@@ -20,6 +20,7 @@ class TeamShowTile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.closeSuccessMsg = this.closeSuccessMsg.bind(this)
+    this.handleMemberClick = this.handleMemberClick.bind(this)
   }
 
   handleClick(event){
@@ -83,7 +84,13 @@ class TeamShowTile extends Component {
   }
 
   closeSuccessMsg(){
-    this.setState({successMsg: ''})
+    this.setState({ successMsg: '' })
+  }
+
+  handleMemberClick(){
+    if(!this.props.currentUser){
+      this.setState({ successMsg: "You need to Sign-in or Sign-up" })
+    }
   }
 
   render() {
@@ -100,11 +107,15 @@ class TeamShowTile extends Component {
     }
 
     let onClick = () =>{
-      let payload = {
-        currentUser: this.props.currentUser,
-        teamId: this.props.id
+      if (currentUser){
+        let payload = {
+          currentUser: this.props.currentUser,
+          teamId: this.props.id
+        }
+        this.props.addMember(payload)
+      } else {
+        this.handleMemberClick();
       }
-      this.props.addMember(payload)
     }
 
     let members, profile_photo;
@@ -115,9 +126,12 @@ class TeamShowTile extends Component {
         } else {
           profile_photo = <i className="fa fa-user fa-lg" ></i>
         }
+        let href;
+        currentUser ? href = `/users/${member.id}` : href = "#" ;
+
         return (
           <li key={member.id}>
-            <a href={`/users/${member.id}`} className="team-page-profile-photo">{profile_photo}&nbsp;&nbsp;{member.username}</a>
+            <a href={href} onClick={this.handleMemberClick} className="team-page-profile-photo">{profile_photo}&nbsp;&nbsp;{member.username}</a>
           </li>
         )
       })
@@ -132,6 +146,7 @@ class TeamShowTile extends Component {
       filterMember = this.props.team.users.filter(u=> {
         return u.id == currentUser.id
       })
+
       if(currentUser.id != this.props.team.manager_id && filterMember.length==0){
         joinTeamDiv = <div className="join-this-team-div">
                         <Link to={`/teams/${this.props.id}`}>
