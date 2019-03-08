@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 
 import TeamIndexTile from '../components/TeamIndexTile';
-
-let name, city, state, zipcode = ''
+import AlertComponent from '../components/AlertComponent';
 
 class SearchBarContainer extends Component {
   constructor(props) {
@@ -14,28 +13,32 @@ class SearchBarContainer extends Component {
       zipcode: '',
       city: '',
       state: '',
-      team: {}
+      teamsNotFoundMesssage: '',
+      teamsFound: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeSuccessMsg = this.closeSuccessMsg.bind(this);
+    this.handleCloseButton = this.handleCloseButton.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value })
-
-    event.target.name == "name" ? name = event.target.value :
-    event.target.name == "city" ? city = event.target.value :
-    event.target.name == "state" ? state = event.target.value :
-    zipcode = event.target.value
+    this.setState({ [event.target.name]: event.target.value.trim() })
   }
 
   handleSubmit(event) {
     event.preventDefault()
+    let { name, zipcode, city, state } = this.state
+    if (!name && !zipcode && !city  && !state ){
+      this.setState({teamsNotFoundMesssage: "Please enter at least one field"})
+      return false;
+    }
+
     const body = JSON.stringify({
-      name: this.state.name,
-      zipcode: this.state.zipcode,
-      city: this.state.city,
-      state: this.state.state
+      name: name,
+      zipcode: zipcode,
+      city: city,
+      state: state
     })
 
     fetch('/api/v1/teams/search.json', {
@@ -46,10 +49,29 @@ class SearchBarContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({
-        teams: body.teams
-      })
+      if (body.teams.length >= 0){
+        this.setState({
+          teams: body.teams,
+          teamsFound: true
+        })
+      }
     })
+  }
+
+  closeSuccessMsg(){
+    this.setState({ teamsNotFoundMesssage: '' })
+  }
+
+  handleCloseButton(x){
+    if (x === this.state.name){
+      this.setState({ name: '' })
+    } else if(x === this.state.city ){
+      this.setState({ city: ''})
+    } else if(x === this.state.state ){
+      this.setState({ state: ''})
+    } else {
+      this.setState({ zipcode: ''})
+    }
   }
 
   render() {
@@ -57,37 +79,38 @@ class SearchBarContainer extends Component {
       return(
         <TeamIndexTile
           key={team.name}
-          id={team.name}
+          id={team.id}
           name={team.name}
           city={team.city}
           state={team.state}
           description={team.description}
           photo={team.photo}
-          team={team}
+          teamProfilePhoto={team.profile_photo}
         />
       )
     })
 
-    let citySpan, stateSpan, zipcodeSpan = ''
-    if (city != '' && city != null ){
-      citySpan = <span className="panel"><strong>{ `city: "${city}"` }</strong> </span>
-    }
-    if (state != '' && state != null){
-      stateSpan = <span className="panel"><strong>{`state: "${state}"`}</strong> </span>
-    }
-    if (zipcode != '' && zipcode != null){
-      zipcodeSpan = <span className="panel"><strong> {`zipcode: "${zipcode}"`} </strong></span>
+    let { name, zipcode, city, state } = this.state
+    let searchedTeamName, searchedCity, searchedState, searchedZipcode;
+    let abc = (x, y, z) => {
+      if(z){
+        x = <span className="panel searchedTeam">{ `${y}: ${z}` }
+              <span className="closeButton" onClick={()=>this.handleCloseButton(z)}>x</span>
+            </span>;
+      }
+      return x;
     }
 
     let searchedTeams = ''
-    if (teams.length > 0){
+    if (this.state.teamsFound){
       searchedTeams =   <div>
                           <br/><br/>
                           <div className="wrapper meetup-header">
-                            <h6><em>Total Teams: <strong>"{this.state.teams.length}"</strong>  </em></h6> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            {citySpan}&nbsp;&nbsp;&nbsp;&nbsp;
-                            {stateSpan}&nbsp;&nbsp;&nbsp;&nbsp;
-                            {zipcodeSpan}&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h6><em>Total Teams found: <strong>"{this.state.teams.length}"</strong>  </em></h6> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {abc(searchedTeamName, "teamName", name)}&nbsp;&nbsp;&nbsp;&nbsp;
+                            {abc(searchedCity, "city", city)}&nbsp;&nbsp;&nbsp;&nbsp;
+                            {abc(searchedState, "state", state)}&nbsp;&nbsp;&nbsp;&nbsp;
+                            {abc(searchedZipcode, "zipcode", zipcode)}&nbsp;&nbsp;&nbsp;&nbsp;
                           </div>
                           <div className="wrapper">
                             {teams}
@@ -95,8 +118,14 @@ class SearchBarContainer extends Component {
                         </div>
     }
 
+    let successMsgDiv = <AlertComponent
+                          successMsg={ this.state.teamsNotFoundMesssage }
+                          closeSuccessMsg={ this.closeSuccessMsg }
+                        />
+
   return(
     <div>
+      {successMsgDiv}
       <form className="search-bar" onSubmit={this.handleSubmit}>
         <div className="input-group search-bar-team">
           <span className="input-group-label"><label>Search</label></span>

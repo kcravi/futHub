@@ -20,7 +20,7 @@ class TeamShowTile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.closeSuccessMsg = this.closeSuccessMsg.bind(this)
-    this.handleMemberClick = this.handleMemberClick.bind(this)
+    this.validateAuthorizedUserClick = this.validateAuthorizedUserClick.bind(this)
   }
 
   handleClick(event){
@@ -87,10 +87,11 @@ class TeamShowTile extends Component {
     this.setState({ successMsg: '' })
   }
 
-  handleMemberClick(){
+  validateAuthorizedUserClick(x){
     if(!this.props.currentUser){
-      this.setState({ successMsg: "You need to Sign-in or Sign-up" })
+      this.setState({ successMsg: `You need to Sign-in or Sign-up to ${x}` })
     }
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -106,7 +107,7 @@ class TeamShowTile extends Component {
       image = <img src={this.props.teamProfilePhoto.medium.url} />
     }
 
-    let onClick = () =>{
+    let onClick = (x) =>{
       if (currentUser){
         let payload = {
           currentUser: this.props.currentUser,
@@ -114,7 +115,7 @@ class TeamShowTile extends Component {
         }
         this.props.addMember(payload)
       } else {
-        this.handleMemberClick();
+        this.validateAuthorizedUserClick(x);
       }
     }
 
@@ -131,7 +132,7 @@ class TeamShowTile extends Component {
 
         return (
           <li key={member.id}>
-            <a href={href} onClick={this.handleMemberClick} className="team-page-profile-photo">{profile_photo}&nbsp;&nbsp;{member.username}</a>
+            <a href={href} onClick={()=>this.validateAuthorizedUserClick(`view ${member.username}'s profile !!!`)} className="team-page-profile-photo">{profile_photo}&nbsp;&nbsp;{member.username}</a>
           </li>
         )
       })
@@ -150,7 +151,7 @@ class TeamShowTile extends Component {
       if(currentUser.id != this.props.team.manager_id && filterMember.length==0){
         joinTeamDiv = <div className="join-this-team-div">
                         <Link to={`/teams/${this.props.id}`}>
-                          <button className="snip1287" onClick={onClick}> Join This Team </button>
+                          <button className="snip1287" onClick={()=>onClick(`join ${this.props.team.name} !!!`)}> Join This Team </button>
                         </Link><hr/>
                       </div>
       }
