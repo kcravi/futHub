@@ -132,3 +132,19 @@ div.join-this-team-div > a > button.snip1287 {
 .about, .members {
   cursor: pointer;
 }
+
+.searchedTeam {
+  padding: 0 0.5em;
+  border-top: 2px red solid;
+  border-bottom: 2px red solid;
+  font-size: 0.9em;
+  line-height: 2em;
+}
+
+.closeButton {
+  color: red;
+  position: relative;
+  left: 0.5em;
+  bottom: 0.5em;
+  cursor: pointer;
+}

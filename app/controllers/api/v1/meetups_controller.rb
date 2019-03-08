@@ -1,5 +1,5 @@
 class Api::V1::MeetupsController < ApiController
-   before_action :authenticate_user!, except: [:index, :show]
+   before_action :authenticate_user!, except: [:index, :show, :search]
 
   def search
     # topic = params[:search_string]
@@ -10,8 +10,11 @@ class Api::V1::MeetupsController < ApiController
             }
     meetup_parser = MeetupParser.new
     meetup_parser.search(topic)
-    render json: {
-      teams: meetup_parser.meetups
-    }
+
+    if meetup_parser.error == ''
+      render json: { teams: meetup_parser.meetups }
+    else
+      render json: { error: meetup_parser.error }
+    end
   end
 end

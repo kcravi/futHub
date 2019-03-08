@@ -4,8 +4,7 @@ import { Link } from 'react-router'
 
 import MeetupSearchBarIndexTile from '../components/MeetupSearchBarIndexTile';
 import MeetupShowTile from '../components/MeetupShowTile'
-
-let city, state, zipcode = ''
+import AlertComponent from '../components/AlertComponent';
 
 class MeetupSearchBarIndexContainer extends Component {
   constructor(props) {
@@ -15,21 +14,21 @@ class MeetupSearchBarIndexContainer extends Component {
       zipcode: '',
       city: '',
       state: '',
-      team: {}
+      team: {},
+      teamsNotFoundMesssage: '',
+      teamsFound: false
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick  = this.handleClick.bind(this);
     // this.handleClear  = this.handleClear.bind(this);
+    this.closeSuccessMsg = this.closeSuccessMsg.bind(this);
+    this.handleCloseButton = this.handleCloseButton.bind(this);
   }
 
   handleChange(event) {
-    // const newZipcode = event.target.value
     this.setState({ [event.target.name]: event.target.value })
-
-    event.target.name == "city" ? city = event.target.value :
-    event.target.name == "state" ? state = event.target.value :
-    zipcode = event.target.value
   }
 
   // handleClear(){
@@ -42,10 +41,16 @@ class MeetupSearchBarIndexContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    let { name, zipcode, city, state } = this.state
+    if (!name && !zipcode && !city  && !state ){
+      this.setState({teamsNotFoundMesssage: "Please enter at least one field"})
+      return false;
+    }
+
     const body = JSON.stringify({
-      zipcode: this.state.zipcode,
-      city: this.state.city,
-      state: this.state.state
+      zipcode: zipcode,
+      city: city,
+      state: state
     })
 
     fetch('/api/v1/meetups/search.json', {
@@ -56,15 +61,34 @@ class MeetupSearchBarIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({
-        teams: body.teams
-      })
+      if (body.teams){
+        this.setState({
+          teams: body.teams,
+          teamsFound: true
+        })
+      } else {
+        this.setState({ teamsNotFoundMesssage: body.error})
+      }
     })
     // this.handleClear()
   }
 
   handleClick(team){
     this.setState ({ team: team})
+  }
+
+  closeSuccessMsg(){
+    this.setState({ teamsNotFoundMesssage: '' })
+  }
+
+  handleCloseButton(x){
+    if(x === this.state.city ){
+      this.setState({ city: ''})
+    } else if(x === this.state.state ){
+      this.setState({ state: ''})
+    } else {
+      this.setState({ zipcode: ''})
+    }
   }
 
   render() {
@@ -95,25 +119,26 @@ class MeetupSearchBarIndexContainer extends Component {
     //   x = <span className="panel spanCity">{city} <span onClick={onclickX} >X</span> </span>
     // }
 
-    let citySpan, stateSpan, zipcodeSpan = ''
-    if (city != '' && city != null ){
-      citySpan = <span className="panel"><strong>{ `city: "${city}"` }</strong> </span>
-    }
-    if (state != '' && state != null){
-      stateSpan = <span className="panel"><strong>{`state: "${state}"`}</strong> </span>
-    }
-    if (zipcode != '' && zipcode != null){
-      zipcodeSpan = <span className="panel"><strong> {`zipcode: "${zipcode}"`} </strong></span>
+    let { name, zipcode, city, state } = this.state
+    let searchedTeamName, searchedCity, searchedState, searchedZipcode;
+
+    let abc = (x, y, z) => {
+      if(z){
+        x = <span className="panel searchedTeam"><strong>{ `${y}: ${z}` }</strong>
+              <span className="closeButton" onClick={()=>this.handleCloseButton(z)}>x</span>
+            </span>;
+      }
+      return x;
     }
 
     let meetupTeams = ''
-    if (teams.length > 0){
+    if (this.state.teamsFound){
       meetupTeams =   <div>
                         <div className="wrapper meetup-header">
                           <h5><em>Total Teams: <strong>"{this.state.teams.length}"</strong>  </em></h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          {citySpan}&nbsp;&nbsp;&nbsp;&nbsp;
-                          {stateSpan}&nbsp;&nbsp;&nbsp;&nbsp;
-                          {zipcodeSpan}&nbsp;&nbsp;&nbsp;&nbsp;
+                          {abc(searchedCity, "city", city)}&nbsp;&nbsp;&nbsp;&nbsp;
+                          {abc(searchedState, "state", state)}&nbsp;&nbsp;&nbsp;&nbsp;
+                          {abc(searchedZipcode, "zipcode", zipcode)}&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                         <div className="wrapper">
                           {teams}
@@ -122,8 +147,14 @@ class MeetupSearchBarIndexContainer extends Component {
     }
 
     // <button className="button" onClick={browserHistory.goBack}>Back</button>
+
+    let successMsgDiv = <AlertComponent
+                          successMsg={ this.state.teamsNotFoundMesssage }
+                          closeSuccessMsg={ this.closeSuccessMsg }
+                        />
   return(
     <div><br/>
+      {successMsgDiv}
       <form className="search-bar" onSubmit={this.handleSubmit}>
         <div className="input-group">
           <span className="input-group-label"><label>Search</label></span>
