@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router';
 
-import TeamIndexTile from '../components/TeamIndexTile'
 import TournamentIndexContainer from './TournamentIndexContainer'
 import TeamContainer from './TeamContainer'
 import AlertComponent from '../components/AlertComponent'
+import FuthubInfoTile from '../components/FuthubInfoTile'
 
 class HomeIndexContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      success_msg: ''
+      successMsg: '',
+      futhubInfoTile: ''
     }
     this.closeSuccessMsg = this.closeSuccessMsg.bind(this)
+    this.unRegisteredUser = this.unRegisteredUser.bind(this)
   }
 
   componentDidMount(){
-    if(this.props.location){
+    if(this.props.location.state){
       this.setState({successMsg: this.props.location.state})
     }
+
     browserHistory.replace({
       pathname: '/',
       state: ''
@@ -30,16 +33,26 @@ class HomeIndexContainer extends Component {
     this.setState({successMsg: ''})
   }
 
+  unRegisteredUser(){
+    this.setState({futhubInfoTile: <FuthubInfoTile />})
+  }
+
   render(){
     let successMsgDiv = <AlertComponent
                           successMsg={ this.state.successMsg }
                           closeSuccessMsg={this.closeSuccessMsg}
                         />
+
+    let futhubInfoTile;
+    this.state.futhubInfoTile ? futhubInfoTile = <div><br/> {this.state.futhubInfoTile} </div> : '' ;
+
     return (
       <div>
         {successMsgDiv}
-        <br/>
-        <TeamContainer />
+        {futhubInfoTile}
+        <TeamContainer
+          unRegisteredUser={this.unRegisteredUser}
+        />
         <TournamentIndexContainer />
       </div>
     )
