@@ -8,11 +8,13 @@ class TeamContainer extends Component {
     super(props);
     this.state={
       teams: [],
-      current_user_id: null
+      currentUserId: null
     }
   }
 
   componentDidMount(){
+    let props;
+    if (this.props.unRegisteredUser){ props = this.props}
     fetch('/api/v1/teams.json')
     .then(response => {
         if (response.ok) {
@@ -29,6 +31,9 @@ class TeamContainer extends Component {
           teams: body.teams,
           currentUserId: body.current_user_id
         })
+        if(props && !body.current_user_id){
+          props.unRegisteredUser();
+        }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
@@ -48,13 +53,14 @@ class TeamContainer extends Component {
       )
     })
 
-    let newTeamButton = ''
+    let newTeamButton;
     if (this.state.currentUserId) {
       newTeamButton = <button className="button team-button"> Make a New Team </button>
     }
 
     return(
       <div>
+        <br/>
         <div className="row team-title-main-div">
           <div className="small-6 columns team-title-div">
             <a href="/teams">Local Teams </a>
